@@ -1,0 +1,1188 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fiche de Révision — Gestion de Projet (APFG62)</title>
+<style>
+  :root{
+    --bg:#f4f6fb; --panel:#ffffff; --panel2:#eef1f9; --ink:#1b2236;
+    --muted:#5b6480; --line:#dde3f0;
+    --brand:#4a63d8; --brand2:#7c53d6; --accent:#0f9e86; --warn:#c9760a; --danger:#dc3a4f;
+    --ok:#128a5a;
+    --radius:14px;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    margin:0; font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    background:linear-gradient(180deg,#e9edf9,transparent 420px),var(--bg);
+    color:var(--ink); line-height:1.6; font-size:16px;
+  }
+  header.top{
+    padding:34px 20px 24px; text-align:center;
+    background:radial-gradient(1200px 300px at 50% -60px,rgba(74,99,216,.16),transparent),var(--panel);
+    border-bottom:1px solid var(--line);
+  }
+  header.top h1{margin:0 0 6px; font-size:28px; letter-spacing:.3px}
+  header.top .sub{color:var(--muted); font-size:14px}
+  header.top .pills{margin-top:14px; display:flex; gap:8px; justify-content:center; flex-wrap:wrap}
+  .pill{background:var(--panel2); border:1px solid var(--line); color:var(--muted); padding:4px 11px; border-radius:999px; font-size:12.5px}
+
+  /* Tabs */
+  nav.tabs{
+    position:sticky; top:0; z-index:50; display:flex; gap:6px; overflow-x:auto;
+    padding:10px 12px; background:rgba(255,255,255,.9); backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line); scrollbar-width:thin;
+  }
+  nav.tabs button{
+    flex:0 0 auto; cursor:pointer; border:1px solid var(--line); background:var(--panel);
+    color:var(--muted); padding:9px 14px; border-radius:10px; font-size:13.5px; font-weight:600;
+    transition:.15s; white-space:nowrap;
+  }
+  nav.tabs button:hover{color:var(--ink); border-color:var(--brand)}
+  nav.tabs button.active{background:linear-gradient(135deg,var(--brand),var(--brand2)); color:#fff; border-color:transparent}
+
+  main{max-width:1000px; margin:0 auto; padding:26px 18px 80px}
+  section.tab{display:none; animation:fade .25s ease}
+  section.tab.active{display:block}
+  @keyframes fade{from{opacity:0; transform:translateY(6px)}to{opacity:1; transform:none}}
+
+  h2.chap{font-size:23px; margin:6px 0 4px; display:flex; align-items:center; gap:10px}
+  h2.chap .n{background:linear-gradient(135deg,var(--brand),var(--brand2)); color:#fff; font-size:14px; padding:4px 10px; border-radius:8px}
+  .lead{color:var(--muted); margin:0 0 20px; font-size:15px}
+
+  h3{font-size:18px; margin:26px 0 10px; padding-left:12px; border-left:4px solid var(--brand)}
+  h4{font-size:15.5px; margin:18px 0 6px; color:#333c58}
+
+  .card{background:var(--panel); border:1px solid var(--line); border-radius:var(--radius); padding:16px 18px; margin:14px 0}
+  .grid{display:grid; gap:14px}
+  .grid.g2{grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}
+  .grid.g3{grid-template-columns:repeat(auto-fit,minmax(200px,1fr))}
+
+  .box{border-radius:12px; padding:12px 15px; margin:12px 0; border:1px solid var(--line)}
+  .box .lbl{font-weight:700; font-size:12.5px; text-transform:uppercase; letter-spacing:.6px; display:block; margin-bottom:4px}
+  .clair{background:linear-gradient(135deg,rgba(34,199,169,.12),rgba(34,199,169,.03)); border-color:rgba(34,199,169,.4)}
+  .clair .lbl{color:var(--accent)}
+  .ex{background:linear-gradient(135deg,rgba(108,140,255,.12),rgba(108,140,255,.03)); border-color:rgba(108,140,255,.4)}
+  .ex .lbl{color:var(--brand)}
+  .warn{background:linear-gradient(135deg,rgba(255,184,77,.12),rgba(255,184,77,.03)); border-color:rgba(255,184,77,.4)}
+  .warn .lbl{color:var(--warn)}
+  .key{background:linear-gradient(135deg,rgba(124,83,214,.12),rgba(124,83,214,.03)); border-color:rgba(124,83,214,.4)}
+  .key .lbl{color:#6b3fc4}
+
+  ul{margin:8px 0; padding-left:20px}
+  li{margin:4px 0}
+  li strong{color:#111830}
+  p{margin:8px 0}
+
+  table{width:100%; border-collapse:collapse; margin:12px 0; font-size:14px; overflow:hidden; border-radius:10px}
+  th,td{border:1px solid var(--line); padding:9px 11px; text-align:left; vertical-align:top}
+  th{background:var(--panel2); color:#2b3350; font-size:12.5px; text-transform:uppercase; letter-spacing:.4px}
+  tr:nth-child(even) td{background:rgba(30,45,90,.035)}
+  .tbl-wrap{overflow-x:auto}
+
+  .tag{display:inline-block; font-size:11.5px; padding:2px 8px; border-radius:6px; margin:2px 3px 2px 0; font-weight:600}
+  .t-blue{background:rgba(74,99,216,.14); color:#3550c4}
+  .t-green{background:rgba(15,158,134,.14); color:#0b7d69}
+  .t-orange{background:rgba(201,118,10,.15); color:#a35f06}
+  .t-pink{background:rgba(220,58,79,.13); color:#c22b40}
+
+  /* Q&A accordion */
+  details{background:var(--panel); border:1px solid var(--line); border-radius:12px; margin:10px 0; overflow:hidden}
+  details[open]{border-color:var(--brand)}
+  summary{cursor:pointer; padding:13px 16px; font-weight:600; list-style:none; display:flex; gap:10px; align-items:flex-start}
+  summary::-webkit-details-marker{display:none}
+  summary::before{content:"▶"; color:var(--brand); font-size:11px; margin-top:5px; transition:.2s}
+  details[open] summary::before{transform:rotate(90deg)}
+  summary .qn{background:var(--panel2); color:var(--brand); border-radius:6px; padding:1px 8px; font-size:12.5px; flex:0 0 auto}
+  .answer{padding:2px 18px 16px 40px; color:#2b3350; border-top:1px solid var(--line); margin-top:2px}
+  .answer strong{color:#0f1730}
+
+  .mnemo{font-size:20px; font-weight:800; letter-spacing:2px; background:linear-gradient(135deg,var(--brand),var(--accent)); -webkit-background-clip:text; background-clip:text; color:transparent}
+
+  .flow{display:flex; flex-wrap:wrap; gap:8px; align-items:center; margin:12px 0}
+  .flow .step{background:var(--panel2); border:1px solid var(--line); padding:8px 13px; border-radius:9px; font-size:13.5px; font-weight:600}
+  .flow .arr{color:var(--brand); font-weight:800}
+
+  .triangle-wrap{text-align:center; margin:18px 0}
+  .anchor{scroll-margin-top:70px}
+  footer{text-align:center; color:var(--muted); font-size:12.5px; padding:24px; border-top:1px solid var(--line)}
+  a{color:var(--brand)}
+  .searchbar{display:flex; gap:8px; margin:0 0 18px}
+  .searchbar input{flex:1; background:var(--panel); border:1px solid var(--line); border-radius:10px; padding:10px 14px; color:var(--ink); font-size:14px}
+  .searchbar input:focus{outline:none; border-color:var(--brand)}
+  mark{background:var(--warn); color:#1a1400; border-radius:3px; padding:0 2px}
+  .toc{display:flex; flex-wrap:wrap; gap:8px; margin:10px 0 4px}
+  .toc a{font-size:13px; background:var(--panel2); border:1px solid var(--line); padding:5px 11px; border-radius:8px; text-decoration:none; color:var(--muted)}
+  .toc a:hover{color:var(--brand); border-color:var(--brand)}
+</style>
+</head>
+<body>
+
+<header class="top">
+  <h1>📊 Gestion de Projet — Fiche de Révision Complète</h1>
+  <div class="sub">Module APFG62 · Dr. M.F. Haraké · EFREI Campus Paris</div>
+  <div class="pills">
+    <span class="pill">6 chapitres</span>
+    <span class="pill">Cours expliqué</span>
+    <span class="pill">Exemples types</span>
+    <span class="pill">Exos corrigés (TD)</span>
+    <span class="pill">Examen blanc (20 Q/R)</span>
+    <span class="pill">Glossaire</span>
+  </div>
+</header>
+
+<nav class="tabs" id="tabs">
+  <button data-tab="home" class="active">🏠 Vue d'ensemble</button>
+  <button data-tab="c1">Ch.1 · Introduction</button>
+  <button data-tab="c2">Ch.2 · Acteurs</button>
+  <button data-tab="c3">Ch.3 · Pilotage</button>
+  <button data-tab="c4">Ch.4 · Cycle de vie / V</button>
+  <button data-tab="c5">Ch.5 · Agile</button>
+  <button data-tab="c6">Ch.6 · Humain & Risques</button>
+  <button data-tab="exos">📝 Exos types</button>
+  <button data-tab="exam">🎯 Examen blanc</button>
+  <button data-tab="gloss">📖 Glossaire</button>
+</nav>
+
+<main>
+
+<!-- ============================ HOME ============================ -->
+<section class="tab active" id="home">
+  <h2 class="chap">🏠 Vue d'ensemble du module</h2>
+  <p class="lead">Comment tout s'emboîte : d'une idée jusqu'à un livrable réussi. Utilise les onglets pour naviguer, chaque chapitre contient <b>le cours expliqué en clair</b>, des <b>exemples types</b> et des <b>points clés d'examen</b>.</p>
+
+  <div class="searchbar">
+    <input type="text" id="search" placeholder="🔎 Rechercher un mot dans toute la fiche (ex: scope creep, chemin critique, Scrum...)">
+  </div>
+
+  <div class="card">
+    <h4>🧭 Le fil rouge du cours (l'histoire à retenir)</h4>
+    <p>Le module raconte une seule histoire, chapitre par chapitre :</p>
+    <div class="flow">
+      <span class="step">1. C'est quoi un projet ?</span><span class="arr">→</span>
+      <span class="step">2. Qui le fait ? (acteurs/orga)</span><span class="arr">→</span>
+      <span class="step">3. Comment on le pilote ? (contraintes)</span><span class="arr">→</span>
+      <span class="step">4. Dans quel ordre ? (cycle de vie / V)</span><span class="arr">→</span>
+      <span class="step">5. Avec quelle méthode ? (Agile/hybride)</span><span class="arr">→</span>
+      <span class="step">6. Avec quels humains & risques ?</span>
+    </div>
+  </div>
+
+  <div class="grid g2">
+    <div class="card">
+      <h4>⭐ Les 5 concepts que tu DOIS maîtriser</h4>
+      <ul>
+        <li><strong>Définition d'un projet</strong> : temporaire, unique, objectif précis (Ch.1)</li>
+        <li><strong>Le triangle du projet</strong> : Coût – Délai – Qualité/Périmètre (Ch.3)</li>
+        <li><strong>Le Cycle en V</strong> : chaque conception ↔ un test (Ch.4)</li>
+        <li><strong>Agile vs Cycle en V</strong> : flexibilité vs planification (Ch.5)</li>
+        <li><strong>Facteurs humains & gestion des risques</strong> (Ch.6)</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h4>🎓 Structure de l'examen (d'après l'examen blanc)</h4>
+      <ul>
+        <li><strong>Partie I</strong> : 20 questions de compréhension (définitions & explications)</li>
+        <li>Elles suivent l'ordre des chapitres 1 → 6</li>
+        <li>Voir l'onglet <b>🎯 Examen blanc</b> pour les 20 réponses rédigées</li>
+        <li>Les TD (études de cas) montrent le type d'application → onglet <b>📝 Exos types</b></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="box key">
+    <span class="lbl">🔑 Phrase-résumé du module</span>
+    Un <b>projet</b> transforme une idée en <b>livrable</b> concret, dans un <b>temps limité</b> avec des <b>ressources définies</b> ; le réussir = <b>équilibrer coût/délai/qualité</b>, <b>coordonner des acteurs</b>, choisir la <b>bonne méthode</b> et gérer les <b>humains & les risques</b>.
+  </div>
+
+  <h3>🗺️ Carte des chapitres</h3>
+  <div class="tbl-wrap"><table>
+    <tr><th>Ch.</th><th>Titre</th><th>Question à laquelle il répond</th><th>Mots-clés d'examen</th></tr>
+    <tr><td>1</td><td>Introduction au management de projet</td><td>C'est quoi un projet ? Pourquoi ?</td><td>temporalité, unicité, typologie, complexité</td></tr>
+    <tr><td>2</td><td>Acteurs & Organisation</td><td>Qui participe et comment on s'organise ?</td><td>sponsor, chef de projet, matriciel, gouvernance</td></tr>
+    <tr><td>3</td><td>Pilotage & contraintes</td><td>Comment garder le projet sous contrôle ?</td><td>triangle, scope, KPI, écarts, WBS/PERT</td></tr>
+    <tr><td>4</td><td>Cycle de vie & Cycle en V</td><td>Dans quel ordre se déroule le projet ?</td><td>phases, Cycle en V, Waterfall, faisabilité</td></tr>
+    <tr><td>5</td><td>Méthodes agiles & hybrides</td><td>Quelle méthode choisir ?</td><td>Manifeste Agile, Scrum, sprint, hybride</td></tr>
+    <tr><td>6</td><td>Facteurs humains, risques & réussite</td><td>Comment réussir grâce aux gens ?</td><td>leadership, conflits, matrice des risques, REX</td></tr>
+  </table></div>
+</section>
+
+<!-- ============================ CH1 ============================ -->
+<section class="tab" id="c1">
+  <h2 class="chap"><span class="n">Ch.1</span> Introduction au management de projet</h2>
+  <p class="lead">Comprendre ce qu'est un projet, le distinguer d'une activité normale, et savoir pourquoi les entreprises travaillent « par projet ».</p>
+
+  <h3 class="anchor">1. Qu'est-ce qu'un projet ?</h3>
+  <div class="box clair">
+    <span class="lbl">En clair</span>
+    Un <b>projet</b> = réaliser un <b>objectif unique</b>, dans un <b>temps limité</b>, avec des <b>ressources définies</b>, pour répondre au <b>besoin d'un client</b>. Ce n'est PAS une tâche qu'on refait tous les jours.
+  </div>
+
+  <h4>Les définitions officielles (à connaître)</h4>
+  <div class="grid g2">
+    <div class="card"><strong>AFNOR</strong> : « Une démarche spécifique qui permet de structurer méthodiquement et progressivement une réalité à venir », mise en œuvre pour répondre au besoin d'un <b>commanditaire</b>.</div>
+    <div class="card"><strong>ISO 21500</strong> : « Un ensemble unique de processus, constitués d'activités coordonnées et maîtrisées, ayant des <b>dates de début et de fin</b>, entreprises pour atteindre les objectifs du projet. »</div>
+  </div>
+
+  <div class="box key">
+    <span class="lbl">🔑 Les 3 composantes de tout projet (PMI)</span>
+    <span class="tag t-blue">Périmètre / Scope</span> (les résultats attendus) ·
+    <span class="tag t-green">Calendrier / Schedule</span> (dates début→fin) ·
+    <span class="tag t-orange">Ressources</span> (personnes, budget, moyens)
+  </div>
+
+  <h4>Les 5 caractéristiques du management par projet</h4>
+  <div class="tbl-wrap"><table>
+    <tr><th>#</th><th>Caractéristique</th><th>Ce que ça implique</th></tr>
+    <tr><td>1</td><td><strong>Temporalité</strong></td><td>Un début et une fin → il faut planifier</td></tr>
+    <tr><td>2</td><td><strong>Orienté futur / incertain</strong></td><td>Soumis aux aléas → il faut gérer le risque</td></tr>
+    <tr><td>3</td><td><strong>Limité en budget/ressources</strong></td><td>Il faut évaluer coûts et RH</td></tr>
+    <tr><td>4</td><td><strong>Transversalité</strong></td><td>Traverse plusieurs fonctions → organisation dédiée</td></tr>
+    <tr><td>5</td><td><strong>Transformation</strong></td><td>Change les processus, la culture, les postes (gestion du changement)</td></tr>
+  </table></div>
+
+  <h3>2. Projet vs Activité opérationnelle (question d'examen classique)</h3>
+  <div class="tbl-wrap"><table>
+    <tr><th>Activité opérationnelle</th><th>Projet</th></tr>
+    <tr><td>Répétitive et continue</td><td>Temporaire et unique</td></tr>
+    <tr><td>Assure le fonctionnement courant</td><td>Crée un produit/service/résultat nouveau</td></tr>
+    <tr><td>Processus stabilisés, résultats prévisibles</td><td>Forte incertitude et complexité</td></tr>
+    <tr><td>Ex : production en usine, maintenance, paie</td><td>Ex : lancer un nouveau produit, construire un bâtiment</td></tr>
+  </table></div>
+  <div class="box clair"><span class="lbl">Astuce mémo</span> Opérationnel = « faire tourner la machine » (routine). Projet = « construire quelque chose de nouveau » (aventure unique).</div>
+
+  <h3>3. Pourquoi travailler par projet ?</h3>
+  <ul>
+    <li><strong>Problèmes de coopération</strong> : créer des liens nouveaux entre services (ex : marketing + IT) qui n'avaient ni culture ni langage communs.</li>
+    <li><strong>Problèmes de coordination</strong> : quand les tâches sont <b>nouvelles, interdépendantes et incertaines</b>.</li>
+    <li>Mettre en œuvre la <strong>stratégie</strong>, maîtriser l'<strong>innovation</strong>, s'adapter à une <strong>réglementation</strong>, transformer les modèles opérationnels.</li>
+  </ul>
+
+  <h3>4. Types d'objectifs & typologie</h3>
+  <div class="grid g2">
+    <div class="box ex"><span class="lbl">Projet d'optimisation</span> Améliorer ce qui <b>existe déjà</b> (un process, un produit, une organisation).</div>
+    <div class="box ex"><span class="lbl">Projet de conception</span> Créer quelque chose de <b>nouveau</b>, à partir d'une page blanche.</div>
+  </div>
+  <p><strong>Typologie AFNOR</strong> : les projets se classent selon leur nature/domaine (industriels, informatiques, organisationnels, stratégiques…).</p>
+
+  <h3>5. Les 3 dimensions fondamentales</h3>
+  <div class="tbl-wrap"><table>
+    <tr><th>Dimension</th><th>Signification</th><th>Question clé</th></tr>
+    <tr><td><strong>Impulsion</strong></td><td>Origine / naissance du projet</td><td><b>Pourquoi ?</b></td></tr>
+    <tr><td><strong>Réalisation</strong></td><td>Mise en œuvre / exécution</td><td><b>Comment ?</b></td></tr>
+    <tr><td><strong>Destination</strong></td><td>Finalité, bénéficiaires, valeur</td><td><b>Pour qui ?</b></td></tr>
+  </table></div>
+
+  <h3>6. Le niveau de complexité d'un projet</h3>
+  <p>4 critères déterminent la complexité : <span class="tag t-blue">Taille</span> (jours-homme, impact) <span class="tag t-green">Objectif</span> (le but visé) <span class="tag t-orange">Enjeux</span> (financiers, stratégiques, humains) <span class="tag t-pink">Degré de récurrence</span> (déjà fait ou totalement nouveau).</p>
+
+  <h3>7. Les 5 phases de la gestion de projet</h3>
+  <div class="flow">
+    <span class="step">Initiation</span><span class="arr">→</span>
+    <span class="step">Planification</span><span class="arr">→</span>
+    <span class="step">Exécution</span><span class="arr">→</span>
+    <span class="step">Contrôle / Suivi</span><span class="arr">→</span>
+    <span class="step">Clôture</span>
+  </div>
+  <div class="tbl-wrap"><table>
+    <tr><th>Phase</th><th>Objectif</th><th>Activités clés</th></tr>
+    <tr><td>Initiation</td><td>Décider si on lance</td><td>Besoin, faisabilité, parties prenantes, charte du projet</td></tr>
+    <tr><td>Planification</td><td>Organiser l'exécution</td><td>WBS, Gantt, budget, risques, plan de communication, KPI</td></tr>
+    <tr><td>Exécution</td><td>Produire les livrables</td><td>Réaliser les tâches, coordonner l'équipe, gérer les imprévus</td></tr>
+    <tr><td>Contrôle/Suivi</td><td>Rester conforme</td><td>Suivre avancement, écarts, actions correctives, reporting</td></tr>
+    <tr><td>Clôture</td><td>Finaliser & capitaliser</td><td>Livraison, validation client, bilan, leçons apprises, archivage</td></tr>
+  </table></div>
+
+  <h3>8. Repères historiques (dates à connaître)</h3>
+  <div class="tbl-wrap"><table>
+    <tr><th>Date</th><th>Évènement</th></tr>
+    <tr><td>1930s</td><td>Rationalisation des pratiques d'ingénierie (séparation conception/exécution)</td></tr>
+    <tr><td>1957–1959</td><td>Méthodes <b>PERT</b> (Polaris, marine US) et <b>CPM</b> (DuPont)</td></tr>
+    <tr><td>1969</td><td>Création du <b>PMI</b> (Project Management Institute)</td></tr>
+    <tr><td>1987 / 1996</td><td>Premier <b>PMBOK</b> / première édition officielle</td></tr>
+    <tr><td>2001</td><td><b>Manifeste Agile</b></td></tr>
+    <tr><td>2020s</td><td>Management hybride, numérique, IA, ESG</td></tr>
+  </table></div>
+
+  <div class="box key"><span class="lbl">🔑 À retenir pour l'examen</span> Sache <b>définir un projet</b> (temporalité + unicité + objectif), le <b>distinguer de l'opérationnel</b>, citer les <b>5 phases</b> et les <b>facteurs de complexité</b>.</div>
+</section>
+
+<!-- ============================ CH2 ============================ -->
+<section class="tab" id="c2">
+  <h2 class="chap"><span class="n">Ch.2</span> Acteurs du projet & Organisation</h2>
+  <p class="lead">Qui fait quoi dans un projet, et comment structurer l'organisation pour réussir.</p>
+
+  <h3>1. Les parties prenantes (stakeholders)</h3>
+  <div class="box clair"><span class="lbl">Définition</span> Ensemble des personnes/groupes/organisations qui <b>participent</b> au projet, <b>l'influencent</b>, ou <b>sont impactés</b> par ses résultats.</div>
+  <div class="grid g2">
+    <div class="card"><h4>Internes</h4><ul><li>Direction de l'entreprise</li><li>Sponsor / commanditaire</li><li>Chef de projet</li><li>Équipe projet</li><li>Départements fonctionnels (marketing, IT, finance…)</li></ul></div>
+    <div class="card"><h4>Externes</h4><ul><li>Clients</li><li>Utilisateurs finaux</li><li>Fournisseurs & partenaires</li><li>Sous-traitants</li><li>Autorités réglementaires</li></ul></div>
+  </div>
+
+  <h3>2. La cartographie des parties prenantes (Matrice Pouvoir / Intérêt)</h3>
+  <p>Toutes les parties prenantes n'ont pas le même <b>pouvoir</b> ni le même <b>intérêt</b>. On les positionne pour adapter sa communication.</p>
+  <div class="tbl-wrap"><table>
+    <tr><th></th><th>Intérêt élevé</th><th>Intérêt faible</th></tr>
+    <tr><th>Pouvoir élevé</th><td><b>Gérer de près</b><br>(Sponsor, comité de pilotage, direction) → implication forte, décisions partagées</td><td><b>Maintenir satisfaits</b><br>(Direction générale, autorités) → informer sur les points clés</td></tr>
+    <tr><th>Pouvoir faible</th><td><b>Tenir informés</b><br>(Utilisateurs, membres de l'équipe) → communication régulière</td><td><b>Surveiller</b><br>(Parties prenantes secondaires) → suivi ponctuel</td></tr>
+  </table></div>
+
+  <h3>3. Les 3 acteurs principaux (⭐ question d'examen)</h3>
+  <div class="tbl-wrap"><table>
+    <tr><th>Acteur</th><th>Rôle</th><th>Responsabilités clés</th></tr>
+    <tr><td><strong>Sponsor / Commanditaire</strong><br><span class="tag t-orange">MOA - il détient le budget !</span></td><td>Initiateur, représente la direction/le client</td><td>Définir les objectifs stratégiques, valider budget & ressources, décisions majeures, soutenir le chef de projet, garantir l'alignement stratégique</td></tr>
+    <tr><td><strong>Chef de projet</strong><br><span class="tag t-blue">Maître d'œuvre</span></td><td>Le <b>pilote</b> du projet</td><td>Planifier, coordonner l'équipe, suivre délais/coûts/qualité, gérer les risques, communiquer avec les parties prenantes</td></tr>
+    <tr><td><strong>Équipe projet</strong></td><td>Les réalisateurs</td><td>Réaliser les tâches, apporter les compétences techniques, respecter délais & objectifs, collaborer</td></tr>
+    <tr><td><strong>Comité de pilotage</strong> (Steering Committee)</td><td>Organe de gouvernance (MOA)</td><td>Suit, arbitre et valide l'avancement du projet</td></tr>
+  </table></div>
+
+  <div class="box key"><span class="lbl">🔑 MOA vs MOE (à ne jamais confondre)</span>
+  <b>MOA</b> (Maîtrise d'Ouvrage) = le <b>client/commanditaire</b> qui définit le besoin et <b>paye</b>. <b>MOE</b> (Maîtrise d'Œuvre) = le <b>réalisateur</b> (chef de projet + équipe) qui construit. <b>Règle d'or : MOA et MOE doivent être séparées.</b></div>
+
+  <h3>4. Compétences du chef de projet</h3>
+  <div class="grid g3">
+    <div class="box ex"><span class="lbl">Techniques</span> Outils de gestion de projet, planification, organisation</div>
+    <div class="box ex"><span class="lbl">Relationnelles</span> Leadership, communication, négociation, gestion des conflits</div>
+    <div class="box ex"><span class="lbl">Organisationnelles</span> Prise de décision, gestion du temps, résolution de problèmes</div>
+  </div>
+
+  <h3>5. Les 3 modes d'organisation (⭐⭐ question d'examen majeure)</h3>
+  <div class="tbl-wrap"><table>
+    <tr><th>Critère</th><th>Fonctionnelle</th><th>Matricielle</th><th>Par projet</th></tr>
+    <tr><td>Autorité du chef de projet</td><td>Faible</td><td>Partagée</td><td>Forte</td></tr>
+    <tr><td>Gestion des ressources</td><td>Contrôlée par les départements</td><td>Partagée (chef de projet + managers)</td><td>Dédiée au projet</td></tr>
+    <tr><td>Communication</td><td>Verticale</td><td>Mixte (verticale + horizontale)</td><td>Directe et rapide</td></tr>
+    <tr><td>Flexibilité</td><td>Faible</td><td>Moyenne</td><td>Élevée</td></tr>
+    <tr><td>Avantage</td><td>Forte spécialisation, stabilité</td><td>Équilibre + collaboration inter-services</td><td>Décision efficace, équipe engagée</td></tr>
+    <tr><td>Limite</td><td>Coordination difficile, chef de projet faible</td><td>Conflits d'autorité, complexité</td><td>Coût élevé, duplication des ressources</td></tr>
+    <tr><td>Idéal pour…</td><td>Projets simples</td><td>Projets équilibrés</td><td>Projets complexes / stratégiques</td></tr>
+  </table></div>
+  <div class="box clair"><span class="lbl">Comment choisir ?</span> Le choix dépend de la <b>taille</b>, de la <b>complexité</b>, des <b>ressources</b> disponibles et de la <b>structure de l'entreprise</b>.</div>
+
+  <h3>6. Gouvernance du projet</h3>
+  <p><b>Définition</b> : ensemble des structures, règles et mécanismes de décision qui permettent de piloter le projet et d'assurer son alignement avec la stratégie.</p>
+  <ul>
+    <li><strong>Sponsor</strong> : soutient au niveau stratégique, valide, fournit les ressources</li>
+    <li><strong>Comité de pilotage</strong> : supervise, suit les indicateurs, arbitre, gère les risques importants</li>
+    <li><strong>Chef de projet</strong> : pilote l'exécution, coordonne, suivi quotidien</li>
+  </ul>
+  <p>Objectifs : améliorer la prise de décision, assurer la transparence, contrôler les risques, garantir l'atteinte des objectifs.</p>
+
+  <h3>7. Communication & coordination</h3>
+  <div class="grid g2">
+    <div class="card"><h4>Communication interne</h4>Entre membres de l'équipe & responsables internes : réunions, comptes rendus, rapports d'avancement.</div>
+    <div class="card"><h4>Communication externe</h4>Avec les parties prenantes externes : clients, fournisseurs, présentation des résultats.</div>
+  </div>
+  <p><strong>Outils</strong> : réunions, tableaux de bord, rapports d'avancement, plateformes collaboratives, logiciels de gestion de projet.</p>
+
+  <div class="box key"><span class="lbl">🔑 Les 10 règles du fonctionnement en projet (idée centrale)</span>
+  La MOA fixe les orientations et valide les changements ; la MOE respecte délais/coûts/qualité et découpe le projet ; <b>MOA et MOE séparées</b> ; chaque contributeur informe systématiquement la MOE et communique librement avec les autres.</div>
+</section>
+
+<!-- ============================ CH3 ============================ -->
+<section class="tab" id="c3">
+  <h2 class="chap"><span class="n">Ch.3</span> Pilotage & contraintes fondamentales</h2>
+  <p class="lead">Le cœur technique du cours : garder le projet « sous contrôle » en comparant le réel au prévu et en équilibrant le triangle.</p>
+
+  <h3>1. Le pilotage du projet</h3>
+  <div class="box clair"><span class="lbl">En clair</span> Piloter = <b>comparer en permanence ce qui est réalisé avec ce qui était prévu</b>, détecter les écarts, en analyser les causes et lancer des actions correctives.</div>
+  <p>Il faut d'abord un <strong>référentiel initial</strong> (base de comparaison) qui peut être :</p>
+  <ul><li><strong>Technique</strong> : spécifications du produit</li><li><strong>Financier</strong> : budget prévu</li><li><strong>Organisationnel</strong> : planning et ressources</li></ul>
+  <div class="flow">
+    <span class="step">Définir un référentiel</span><span class="arr">→</span>
+    <span class="step">Suivre l'avancement</span><span class="arr">→</span>
+    <span class="step">Comparer réel / prévu</span><span class="arr">→</span>
+    <span class="step">Corriger</span>
+  </div>
+
+  <h3>2. Le triangle du projet (⭐⭐⭐ LE concept star)</h3>
+  <div class="triangle-wrap">
+    <svg width="260" height="200" viewBox="0 0 260 200" aria-label="Triangle du projet">
+      <polygon points="130,20 30,180 230,180" fill="rgba(74,99,216,.10)" stroke="#4a63d8" stroke-width="2.5"/>
+      <text x="130" y="12" text-anchor="middle" fill="#1b2236" font-size="15" font-weight="700">COÛT</text>
+      <text x="18" y="196" text-anchor="middle" fill="#1b2236" font-size="15" font-weight="700">DÉLAI</text>
+      <text x="242" y="196" text-anchor="middle" fill="#1b2236" font-size="15" font-weight="700">QUALITÉ</text>
+      <text x="130" y="120" text-anchor="middle" fill="#7c53d6" font-size="14" font-weight="700">PROJET</text>
+    </svg>
+  </div>
+  <p>Un projet réussi respecte 3 contraintes <b>interdépendantes</b> :</p>
+  <div class="tbl-wrap"><table>
+    <tr><th>Contrainte</th><th>Définition</th><th>Défini par</th></tr>
+    <tr><td><strong>Coût</strong></td><td>Ensemble des ressources financières nécessaires</td><td>Budget (RH, équipements, sous-traitants…)</td></tr>
+    <tr><td><strong>Délai</strong></td><td>Durée nécessaire pour réaliser le projet</td><td>Planning, jalons, dates de livraison</td></tr>
+    <tr><td><strong>Qualité (+ Périmètre)</strong></td><td>Conformité du résultat aux exigences</td><td>Cahier des charges, spécifications, attentes client</td></tr>
+  </table></div>
+  <div class="box key"><span class="lbl">🔑 Le principe des interdépendances (question typique)</span>
+  <b>Toute modification d'une contrainte impacte les deux autres :</b>
+  <ul>
+    <li>Réduire les <b>délais</b> → ↑ coûts (plus de ressources) ou ↓ qualité</li>
+    <li>Réduire les <b>coûts</b> → ↓ qualité ou ↑ délais</li>
+    <li>Améliorer la <b>qualité</b> → ↑ coûts et/ou ↑ délais</li>
+  </ul></div>
+
+  <h4>Variante : le « Quadruple Constraint »</h4>
+  <p>On ajoute une 4ᵉ dimension : la <strong>satisfaction du client</strong>. Un projet techniquement réussi mais qui ne satisfait pas le client n'est <b>pas</b> un succès. Bénéfices qualitatifs = nouvelles compétences, partenariats, expérience de l'équipe — mais toujours dans la limite du budget.</p>
+
+  <h3>3. Les arbitrages</h3>
+  <p>Les ressources étant limitées, le chef de projet doit <b>arbitrer</b> (choisir le meilleur compromis). Exemples : accélérer en payant plus (délai/coût), simplifier les specs (coût/qualité), reporter des fonctionnalités (délai/périmètre). Les décisions majeures sont validées par le <b>comité de pilotage</b>.</p>
+
+  <h3>4. Le périmètre (Scope) & le Scope creep</h3>
+  <div class="box clair"><span class="lbl">Périmètre (Scope)</span> L'ensemble des travaux/résultats <b>inclus</b> dans le projet — et surtout ce qui est <b>exclu</b>. Défini par le cahier des charges, les specs, les objectifs.</div>
+  <div class="box warn"><span class="lbl">⚠️ Scope creep (dérive du périmètre)</span> Extension incontrôlée du périmètre : de nouvelles demandes s'ajoutent en cours de route. Conséquences : <b>retards, dépassements de budget, surcharge de travail</b>. À contrôler absolument.</div>
+
+  <h3>5. Les livrables</h3>
+  <p>Résultat concret et mesurable produit pendant le projet (document, produit, service, système). Ce sont des <b>points de contrôle</b>.</p>
+  <div class="grid g2">
+    <div class="box ex"><span class="lbl">Livrables intermédiaires</span> Cahier des charges, étude de faisabilité, prototype, maquette, rapport d'avancement</div>
+    <div class="box ex"><span class="lbl">Livrable final</span> Produit final, logiciel opérationnel, rapport final, système en production</div>
+  </div>
+
+  <h3>6. Suivi de l'avancement</h3>
+  <p>On suit 3 éléments : le <strong>travail réalisé</strong>, les <strong>ressources consommées</strong> (temps/coûts), et le <strong>travail restant</strong>. Outils : tableaux de bord, rapports d'avancement, diagrammes, KPI, <strong>courbe en S</strong> (estimer le reste à faire et le coût final prévisionnel).</p>
+
+  <h4>WBS — Work Breakdown Structure</h4>
+  <div class="card">
+    <p>Technique qui <b>décompose le projet</b> en éléments plus petits et gérables (hiérarchie en arbre).</p>
+    <ul>
+      <li>3 niveaux : produit global → grands livrables/phases → sous-tâches (lots de travail)</li>
+      <li>Chaque élément a un <b>responsable, un coût, une échéance</b></li>
+      <li><strong>Règle des 100 %</strong> : la somme des éléments d'un niveau = 100 % du travail du niveau supérieur (rien en plus, rien en moins)</li>
+    </ul>
+  </div>
+
+  <h4>PERT & Chemin critique (⭐ souvent en exo)</h4>
+  <div class="card">
+    <p><b>PERT</b> (Program Evaluation and Review Technique) : réseau de tâches et de leurs dépendances sous forme de graphe. Développé pour le programme <b>POLARIS</b> (marine US).</p>
+    <ul>
+      <li><strong>Tâche</strong> (flèche/bloc avec durée), <strong>Étape</strong> (cercle, début/fin), <strong>tâche fictive</strong> (flèche pointillée, dépendance sans durée)</li>
+      <li>Liens : <b>Fin→Début (FD)</b> le plus courant, FF, DD, DF</li>
+      <li><strong>Dates au plus tôt</strong> (début tôt, fin tôt = début+durée) et <strong>au plus tard</strong> (calculées en remontant le graphe)</li>
+      <li><strong>Marge</strong> = date au plus tard − date au plus tôt. Marge ≥ 0. <b>Si marge = 0 → tâche critique.</b></li>
+      <li><strong>Chemin critique</strong> = suite de tâches à marge nulle = <b>le chemin le plus long</b> = détermine la durée totale. Toute tâche critique en retard = <b>projet en retard.</b></li>
+    </ul>
+  </div>
+
+  <h3>7. Analyse des écarts & actions correctives</h3>
+  <p>Écarts possibles sur délais / coûts / qualité. Causes : mauvaise estimation, retards, manque de ressources, changement du cahier des charges, problèmes techniques. Actions : réorganiser les tâches, réaffecter les ressources, modifier le planning, ajuster le périmètre.</p>
+
+  <h3>8. Indicateurs (KPI)</h3>
+  <div class="tbl-wrap"><table>
+    <tr><th>Catégorie</th><th>Exemples</th></tr>
+    <tr><td>Indicateurs de <b>délai</b></td><td>Taux d'avancement, respect des jalons, avance/retard sur le planning</td></tr>
+    <tr><td>Indicateurs de <b>coût</b></td><td>Budget consommé, écart coût prévu/réel, coût restant (RAF)</td></tr>
+    <tr><td>Indicateurs de <b>qualité</b></td><td>Nombre de défauts/anomalies, taux de conformité, satisfaction utilisateurs</td></tr>
+  </table></div>
+
+  <h3>9. Critères de succès d'un projet</h3>
+  <p>Traditionnel = respect du <b>triangle</b> (budget, délais, qualité). Mais aussi : <b>satisfaction du client</b>, atteinte des objectifs, <b>création de valeur</b> pour l'organisation, satisfaction de l'équipe.</p>
+
+  <div class="box key"><span class="lbl">🔑 À retenir pour l'examen</span> Triangle Coût/Délai/Qualité + interdépendances ; définir Scope & scope creep ; rôle des KPI ; principe du WBS (règle des 100 %) et du chemin critique (marge nulle).</div>
+</section>
+
+<!-- ============================ CH4 ============================ -->
+<section class="tab" id="c4">
+  <h2 class="chap"><span class="n">Ch.4</span> Cycle de vie du projet & Cycle en V</h2>
+  <p class="lead">Dans quel ordre se déroule un projet, et zoom sur l'approche classique « Cycle en V ».</p>
+
+  <h3>1. Le principe de la fusée (métaphore)</h3>
+  <p>Le projet mûrit par étapes successives ; à chaque niveau il gagne en <b>structure, validation et valeur</b>, et le <b>risque diminue</b> (beaucoup d'idées au départ, peu de livrables au final).</p>
+  <div class="flow">
+    <span class="step">💡 Idée</span><span class="arr">→</span>
+    <span class="step">🔍 Filtre</span><span class="arr">→</span>
+    <span class="step">📋 Avant-projet</span><span class="arr">→</span>
+    <span class="step">🚀 Projet</span><span class="arr">→</span>
+    <span class="step">🎁 Livrable</span>
+  </div>
+  <div class="tbl-wrap"><table>
+    <tr><th>Étape</th><th>Objectif</th><th>Correspond à…</th></tr>
+    <tr><td>Idée</td><td>Générer des pistes</td><td>Idéation / exploration</td></tr>
+    <tr><td>Filtre</td><td>Éliminer les idées non viables</td><td>Tri de portefeuille, 1ère faisabilité</td></tr>
+    <tr><td>Avant-projet</td><td>Vérifier réalisable & pertinent</td><td>Initiation, business case, note de cadrage</td></tr>
+    <tr><td>Projet</td><td>Réaliser le travail</td><td>PMBOK, PRINCE2, Agile/Scrum, hybride</td></tr>
+    <tr><td>Livrable</td><td>Apporter de la valeur concrète</td><td>Produit/service validé par le client</td></tr>
+  </table></div>
+
+  <h3>2. Les grandes approches</h3>
+  <div class="tbl-wrap"><table>
+    <tr><th>Aspect</th><th>Approche séquentielle (Waterfall)</th><th>Approche exploratoire / émergente</th></tr>
+    <tr><td>Principe</td><td>Phases successives et planifiées</td><td>Commence par explorer le problème</td></tr>
+    <tr><td>Conditions</td><td>Objectifs clairs et stables dès le départ</td><td>Objectifs peu clairs ou évolutifs</td></tr>
+    <tr><td>Avantage</td><td>Excellente maîtrise de la feuille de route</td><td>Flexibilité, adaptation aux besoins</td></tr>
+    <tr><td>Inconvénient</td><td>Si les objectifs changent → tout recommencer</td><td>Plus long au début (comprendre le problème)</td></tr>
+    <tr><td>Exemple</td><td>Projet à specs bien définies</td><td>Innovation, proof of concept</td></tr>
+  </table></div>
+  <div class="box clair"><span class="lbl">Chiffre à citer</span> L'approche <b>Waterfall</b> reste la plus répandue (~<b>80 %</b> des projets en entreprise). C'est <b>la base</b> de la gestion de projet, adaptée aux gros projets transversaux et stratégiques.</div>
+
+  <h3>3. Le Cycle en V (⭐⭐ concept clé)</h3>
+  <div class="box clair"><span class="lbl">En clair</span> Modèle séquentiel où <b>chaque phase de conception (descente) correspond à une phase de test (montée)</b>. On valide à chaque niveau → qualité et conformité garanties.</div>
+  <div class="tbl-wrap"><table>
+    <tr><th>Branche descendante (Conception)</th><th>↔</th><th>Branche ascendante (Validation)</th></tr>
+    <tr><td>Analyse des besoins</td><td>↔</td><td>Tests d'acceptation (validation client)</td></tr>
+    <tr><td>Spécifications fonctionnelles</td><td>↔</td><td>Tests système</td></tr>
+    <tr><td>Conception technique</td><td>↔</td><td>Tests d'intégration</td></tr>
+    <tr><td>Développement / codage</td><td>↔</td><td>Tests unitaires</td></tr>
+  </table></div>
+  <p><strong>Principe clé</strong> : chaque étape doit être <b>validée avant de passer à la suivante</b>.</p>
+
+  <div class="grid g2">
+    <div class="card"><h4>✅ Avantages</h4><ul><li>Organisation claire, phases structurées</li><li>Documentation complète & traçabilité</li><li>Contrôle qualité systématique (tests associés)</li><li>Adapté aux projets à exigences stables</li></ul></div>
+    <div class="card"><h4>❌ Limites</h4><ul><li>Manque de flexibilité (changer les exigences est dur)</li><li>Retour utilisateur <b>tardif</b> (produit vu à la fin)</li><li>Risque d'inadéquation si les besoins évoluent</li><li>Corrections tardives = coûteuses</li></ul></div>
+  </div>
+  <div class="box ex"><span class="lbl">Quand l'utiliser ?</span> Projets à <b>exigences stables</b>, <b>réglementés/critiques</b> (aéronautique, automobile, médical, défense), industriels/embarqués, où <b>sécurité, fiabilité et traçabilité</b> priment.</div>
+
+  <h3>4. Cycle de vie : le modèle combiné</h3>
+  <p>Correspondance entre les deux vocabulaires (à connaître) :</p>
+  <div class="tbl-wrap"><table>
+    <tr><th>Gestion du projet</th><th>Cycle de vie du projet</th><th>Description</th></tr>
+    <tr><td>Initiation</td><td>Pré-étude</td><td>Identification du besoin, opportunité, faisabilité</td></tr>
+    <tr><td>Planification</td><td>Étude</td><td>Définition précise, planification ressources/délais/coûts</td></tr>
+    <tr><td>Exécution</td><td>Réalisation</td><td>Mise en œuvre, production des livrables</td></tr>
+    <tr><td>Contrôle</td><td>Réalisation / Exploitation</td><td>Suivi avancement, délais, budget, qualité</td></tr>
+    <tr><td>Clôture</td><td>Exploitation / Désinvestissement</td><td>Livraison finale, bilan, fin de vie</td></tr>
+  </table></div>
+
+  <h3>5. Focus sur la Pré-étude / Analyse des besoins</h3>
+  <p>Aussi appelée étude préalable, étude de faisabilité ou d'opportunité. C'est la <b>base de décision Go / No Go</b>.</p>
+  <h4>Les 6 étapes de l'étude de faisabilité</h4>
+  <div class="flow">
+    <span class="step">1. Rappel de la demande</span>
+    <span class="step">2. Contour du projet</span>
+    <span class="step">3. Objectifs</span>
+    <span class="step">4. Bilan de l'existant</span>
+    <span class="step">5. Solutions étudiées</span>
+    <span class="step">6. Risques & enjeux</span>
+  </div>
+  <p>Outils de décision : <strong>Analyse coûts/bénéfices</strong>, <strong>ROI</strong> (retour sur investissement), <strong>Analyse des risques</strong> → décision <span class="tag t-green">Go</span> / <span class="tag t-pink">No Go</span>.</p>
+
+  <h4>Le cahier des charges</h4>
+  <p>Document qui <b>formalise les besoins</b> : problème à résoudre, fonctions principales, caractéristiques techniques, priorités, contraintes, critères de qualité. Il assure une <b>compréhension commune</b> client ↔ équipe.</p>
+
+  <h4>3 outils de planification</h4>
+  <div class="grid g3">
+    <div class="box ex"><span class="lbl">WBS</span> Décompose le projet en tâches/sous-tâches (structure hiérarchique)</div>
+    <div class="box ex"><span class="lbl">Gantt</span> Barres horizontales = tâches dans le temps (planning visuel)</div>
+    <div class="box ex"><span class="lbl">PERT</span> Réseau de dépendances → chemin critique</div>
+  </div>
+
+  <h4>Types de besoins utilisateurs (modèle de Kano simplifié)</h4>
+  <div class="grid g3">
+    <div class="card"><strong>Normaux</strong><br>Explicitement exprimés</div>
+    <div class="card"><strong>Attendus</strong><br>Non exprimés mais indispensables au bon fonctionnement</div>
+    <div class="card"><strong>Excitants</strong><br>Fonctionnalités innovantes qui dépassent les attentes</div>
+  </div>
+
+  <h3>6. Les phases opérationnelles (versions Alpha/Beta/Gold)</h3>
+  <p>Pendant l'exécution, on livre par versions : <strong>Alpha</strong> (1ère version, fonctionnalités principales) → <strong>Beta</strong> (stable, testée en conditions réelles) → <strong>Gold</strong> (version finale prête à livrer). La <strong>recette</strong> = validation finale du livrable + signature du procès-verbal de réception + garantie.</p>
+
+  <div class="box key"><span class="lbl">🔑 À retenir pour l'examen</span> Le Cycle en V = chaque conception ↔ un test, validation progressive ; ses avantages/limites ; ses contextes (réglementé/critique) ; les 5 phases du cycle de vie et la correspondance avec les phases de gestion.</div>
+</section>
+
+<!-- ============================ CH5 ============================ -->
+<section class="tab" id="c5">
+  <h2 class="chap"><span class="n">Ch.5</span> Méthodes agiles & approches hybrides</h2>
+  <p class="lead">Pourquoi l'Agile est né, comment il fonctionne (Scrum), et comment le combiner avec le classique.</p>
+
+  <h3>1. Pourquoi les méthodes agiles ?</h3>
+  <p>Les méthodes traditionnelles (Cycle en V, cascade) supposent : besoins clairs dès le départ, environnement stable, peu de changements. Or dans les projets modernes (surtout numériques), ces hypothèses sont <b>souvent irréalistes</b>.</p>
+  <div class="box warn"><span class="lbl">⚠️ Les 4 problèmes des méthodes traditionnelles</span>
+  <ol>
+    <li><b>Découverte tardive des erreurs</b> (à la fin, pendant les tests)</li>
+    <li><b>Difficulté à gérer les changements</b> (il faut revenir en arrière)</li>
+    <li><b>Faible implication des utilisateurs</b> (produit vu à la fin)</li>
+    <li><b>Risque d'inadéquation</b> avec les besoins réels (qui ont évolué)</li>
+  </ol></div>
+
+  <h3>2. Le Manifeste Agile (2001)</h3>
+  <p>En 2001, <b>17 experts</b> se réunissent aux USA et créent le Manifeste Agile — une philosophie basée sur la <b>flexibilité</b> et la <b>collaboration</b>.</p>
+  <div class="box key"><span class="lbl">🔑 Les 4 valeurs fondamentales (à connaître par cœur)</span>
+  <table style="margin-top:8px">
+    <tr><th>On privilégie…</th><th>plutôt que…</th></tr>
+    <tr><td>Les <b>individus et interactions</b></td><td>les processus et les outils</td></tr>
+    <tr><td>Un <b>produit fonctionnel</b></td><td>une documentation exhaustive</td></tr>
+    <tr><td>La <b>collaboration avec le client</b></td><td>la négociation contractuelle</td></tr>
+    <tr><td>L'<b>adaptation au changement</b></td><td>le suivi strict d'un plan</td></tr>
+  </table>
+  <p style="margin-top:8px">⚠️ Nuance : les éléments de droite ne sont pas inutiles, mais ceux de <b>gauche sont prioritaires</b>.</p>
+  </div>
+  <p>+ <strong>12 principes</strong> : livraison rapide & régulière, acceptation du changement, collaboration client, équipes autonomes, amélioration continue…</p>
+
+  <h3>3. Développement itératif & incrémental (⭐ notion d'itération)</h3>
+  <div class="box clair"><span class="lbl">En clair</span> Au lieu de tout livrer à la fin, on découpe le projet en petites périodes (<b>itérations / sprints</b>). Chaque sprint produit une <b>version fonctionnelle</b> du produit qui s'enrichit progressivement.</div>
+  <p><strong>Durée d'un sprint</strong> : 1, 2 ou 4 semaines (généralement 2 à 4).</p>
+  <div class="box ex"><span class="lbl">Exemple : site e-commerce</span>
+  Sprint 1 : création de compte → Sprint 2 : recherche produits → Sprint 3 : panier → Sprint 4 : paiement. Les utilisateurs <b>testent à chaque sprint</b> → feedback rapide, corrections peu coûteuses.</div>
+
+  <h3>4. Scrum (la méthode agile la plus utilisée)</h3>
+  <h4>Les 3 rôles</h4>
+  <div class="tbl-wrap"><table>
+    <tr><th>Rôle</th><th>Mission</th></tr>
+    <tr><td><strong>Product Owner</strong></td><td>Représente le client, définit les besoins du produit, <b>priorise</b> les fonctionnalités</td></tr>
+    <tr><td><strong>Scrum Master</strong></td><td>Facilite le travail de l'équipe, veille au respect de la méthode, <b>lève les obstacles</b></td></tr>
+    <tr><td><strong>Équipe de développement</strong></td><td>Réalise le travail technique, développe & teste, <b>s'auto-organise</b></td></tr>
+  </table></div>
+
+  <h4>Les 4 cérémonies (événements Scrum)</h4>
+  <div class="tbl-wrap"><table>
+    <tr><th>Événement</th><th>Quand</th><th>But</th></tr>
+    <tr><td><strong>Sprint Planning</strong></td><td>Début du sprint</td><td>Définir les objectifs, sélectionner & répartir les fonctionnalités → plan de travail</td></tr>
+    <tr><td><strong>Daily Scrum</strong></td><td>Chaque jour (15 min max)</td><td>Coordination : « fait hier ? / fait aujourd'hui ? / obstacles ? »</td></tr>
+    <tr><td><strong>Sprint Review</strong></td><td>Fin du sprint</td><td>Présenter le travail, recueillir le retour client</td></tr>
+    <tr><td><strong>Sprint Retrospective</strong></td><td>Après la review</td><td>Amélioration continue : ce qui a marché / à améliorer</td></tr>
+  </table></div>
+
+  <h3>5. Avantages & limites de l'Agile</h3>
+  <div class="grid g2">
+    <div class="card"><h4>✅ Avantages</h4><ul><li>Adaptation rapide aux changements</li><li>Feedback rapide des utilisateurs</li><li>Détection précoce des problèmes (→ corrections moins coûteuses)</li><li>Meilleure implication/motivation de l'équipe</li><li>Amélioration continue</li></ul></div>
+    <div class="card"><h4>❌ Limites</h4><ul><li>Nécessite une <b>forte implication du client</b> (pas toujours dispo)</li><li>Difficile pour les <b>très grands projets</b> (coordination)</li><li>Documentation parfois insuffisante (problème si réglementation)</li><li>Nécessite des <b>équipes expérimentées</b> et autonomes</li></ul></div>
+  </div>
+
+  <h3>6. Cycle en V vs Agile (⭐⭐ comparaison d'examen)</h3>
+  <div class="tbl-wrap"><table>
+    <tr><th>Critère</th><th>Cycle en V</th><th>Méthodes Agiles</th></tr>
+    <tr><td>Planification</td><td>Très détaillée au début</td><td>Progressive</td></tr>
+    <tr><td>Gestion des besoins</td><td>Définis dès le départ</td><td>Évolutifs</td></tr>
+    <tr><td>Livraison</td><td>À la fin du projet</td><td>Progressive (par sprint)</td></tr>
+    <tr><td>Gestion du changement</td><td>Difficile à intégrer</td><td>Adaptation continue</td></tr>
+    <tr><td>Rôle du client</td><td>Faible implication</td><td>Forte collaboration</td></tr>
+    <tr><td>Flexibilité</td><td>Faible</td><td>Élevée</td></tr>
+  </table></div>
+
+  <h3>7. Les approches hybrides</h3>
+  <div class="box clair"><span class="lbl">En clair</span> Combiner le <b>meilleur des deux mondes</b> : planification structurée pour les phases critiques + flexibilité agile pour les phases d'innovation. Le classique est parfois trop rigide, l'agile parfois trop peu structuré.</div>
+  <div class="box ex"><span class="lbl">Exemple : véhicule connecté</span>
+  Conception du <b>matériel électronique</b> (normes strictes) → <b>gestion traditionnelle</b>. <b>Interface & apps embarquées</b> (besoin de flexibilité) → <b>développement agile</b>.</div>
+
+  <h3>8. Choisir la méthode (il n'y a pas de méthode idéale)</h3>
+  <div class="tbl-wrap"><table>
+    <tr><th>Facteur de choix</th><th>Cycle en V si…</th><th>Agile si…</th></tr>
+    <tr><td>Besoins</td><td>Clairs & stables</td><td>Évolutifs</td></tr>
+    <tr><td>Innovation</td><td>Faible</td><td>Importante</td></tr>
+    <tr><td>Réglementation</td><td>Normes strictes</td><td>Peu contraint</td></tr>
+    <tr><td>Disponibilité utilisateurs</td><td>Faible</td><td>Forte (tests fréquents)</td></tr>
+    <tr><td>Exemples</td><td>Pont, aéronautique, secteur public</td><td>Appli mobile, plateforme web, startup</td></tr>
+  </table></div>
+
+  <div class="box key"><span class="lbl">🔑 À retenir pour l'examen</span> 4 valeurs + principes agiles ; notion d'itération/sprint ; 3 rôles + 4 cérémonies Scrum ; tableau comparatif V/Agile ; principe et intérêt de l'hybride.</div>
+</section>
+
+<!-- ============================ CH6 ============================ -->
+<section class="tab" id="c6">
+  <h2 class="chap"><span class="n">Ch.6</span> Facteurs humains, risques & réussite</h2>
+  <p class="lead">Un projet réussit d'abord grâce aux <b>gens</b> : leadership, communication, coopération, gestion des conflits — puis grâce à une bonne gestion des risques.</p>
+
+  <h3>1. L'importance des facteurs humains</h3>
+  <div class="box clair"><span class="lbl">Idée principale</span> Même avec un planning parfait, un bon budget et de bons outils, <b>un projet peut échouer si les relations humaines sont mal gérées</b>. La gestion de projet est aussi une <b>gestion des relations humaines</b>.</div>
+  <p>Les 4 facteurs humains clés : <span class="tag t-blue">Leadership</span> <span class="tag t-green">Communication</span> <span class="tag t-orange">Confiance & coopération</span> <span class="tag t-pink">Motivation</span>.</p>
+
+  <h3>2. Le rôle du chef de projet = un LEADER</h3>
+  <p>Aujourd'hui, les entreprises considèrent que les <b>compétences humaines (soft skills)</b> sont les plus importantes. Le chef de projet n'est pas qu'un gestionnaire de planning : il est <b>leader, coordinateur, facilitateur, décideur</b>.</p>
+  <p>Ses 4 grandes missions : 1) définir & communiquer la vision · 2) organiser & coordonner · 3) motiver l'équipe · 4) gérer les problèmes & conflits.</p>
+
+  <h3>3. Les styles de leadership (⭐ tableau d'examen)</h3>
+  <div class="tbl-wrap"><table>
+    <tr><th>Style</th><th>Décision</th><th>Participation</th><th>Situation adaptée</th><th>Limite</th></tr>
+    <tr><td><strong>Directif</strong></td><td>Chef de projet</td><td>Faible</td><td>Urgence / crise</td><td>Peut démotiver</td></tr>
+    <tr><td><strong>Participatif</strong></td><td>Partagée</td><td>Élevée</td><td>Innovation</td><td>Décision plus lente</td></tr>
+    <tr><td><strong>Coach</strong> (développement)</td><td>Équipe autonome</td><td>Très élevée</td><td>Développement des compétences</td><td>Demande du temps, équipe motivée</td></tr>
+  </table></div>
+  <div class="box key"><span class="lbl">🔑 Message clé</span> Il n'existe <b>pas un seul bon style</b> : un bon chef de projet <b>adapte son style</b> au contexte et à la maturité de l'équipe.</div>
+
+  <h3>4. La communication = le « système nerveux » du projet</h3>
+  <p>Un projet échoue plus souvent à cause d'un <b>problème de communication</b> que d'un problème technique. Le chef de projet est un <b>hub de communication</b>.</p>
+  <div class="grid g2">
+    <div class="card"><h4>Formelle</h4>Réunions planifiées, rapports écrits, tableaux de bord</div>
+    <div class="card"><h4>Informelle</h4>Discussions rapides, messages instantanés, échanges spontanés</div>
+  </div>
+  <p><strong>Outils</strong> : réunions (kick-off, avancement, résolution), outils numériques (Teams, Slack, Trello/Jira, Asana), documents projet (rapports, tableaux de bord, comptes rendus).</p>
+  <div class="box warn"><span class="lbl">⚠️ Limites des outils</span> Trop d'outils → confusion ; mauvaise utilisation → inefficacité. <b>L'outil ne remplace pas la qualité de la communication humaine.</b></div>
+
+  <h3>5. Travail d'équipe & coopération</h3>
+  <p>« Aucun membre ne peut réussir seul dans un projet. » Une équipe projet est <b>temporaire, pluridisciplinaire, orientée objectif commun</b>.</p>
+  <p><strong>Les 4 facteurs d'une bonne coopération</strong> : <span class="tag t-blue">Confiance</span> · <span class="tag t-green">Objectifs communs</span> · <span class="tag t-orange">Rôles clairs</span> · <span class="tag t-pink">Coordination</span>.</p>
+
+  <h3>6. Gestion des conflits</h3>
+  <div class="box clair"><span class="lbl">Idée clé</span> Les conflits sont <b>inévitables</b>. Le rôle du chef de projet n'est <b>pas de les éviter</b> mais de les <b>gérer efficacement</b> (être médiateur).</div>
+  <div class="grid g2">
+    <div class="card"><h4>Causes fréquentes</h4><ul><li>Priorités différentes (marketing rapidité vs technique qualité)</li><li>Contraintes de temps, ressources limitées</li><li>Problèmes de communication</li><li>Différences de personnalité</li></ul></div>
+    <div class="card"><h4>3 types de conflits</h4><ul><li><b>Technique</b> : désaccord sur les solutions/choix</li><li><b>Organisationnel</b> : répartition des tâches/responsabilités</li><li><b>Relationnel</b> : tensions entre personnes</li></ul></div>
+  </div>
+  <p><strong>Méthodes de résolution</strong> : Discussion ouverte → Compromis → Médiation → Décision (le chef tranche si nécessaire).</p>
+  <div class="box ex"><span class="lbl">Impact positif</span> Bien gérés, certains conflits <b>améliorent les décisions</b> et favorisent le débat/la créativité. « Un conflit bien géré devient une opportunité d'amélioration. »</div>
+
+  <h3>7. La gestion des risques</h3>
+  <div class="box clair"><span class="lbl">Définition</span> Un <b>risque</b> = un événement <b>incertain</b> qui peut avoir un <b>impact</b> sur les objectifs (coûts, délais, qualité). Un bon chef de projet <b>anticipe</b> les risques au lieu de les <b>subir</b>.</div>
+  <h4>Les types de risques</h4>
+  <div class="tbl-wrap"><table>
+    <tr><th>Type</th><th>Exemple</th></tr>
+    <tr><td>Techniques</td><td>Bug logiciel, erreur de conception</td></tr>
+    <tr><td>Financiers</td><td>Dépassement de budget, hausse du prix des matières</td></tr>
+    <tr><td>Organisationnels</td><td>Mauvaise coordination, absence d'un membre clé</td></tr>
+    <tr><td>Humains</td><td>Conflits, manque de motivation</td></tr>
+    <tr><td>Externes</td><td>Nouvelle loi, crise économique, événement imprévu</td></tr>
+  </table></div>
+
+  <h4>Le processus de gestion des risques (4 étapes)</h4>
+  <div class="flow">
+    <span class="step">1. Identifier</span><span class="arr">→</span>
+    <span class="step">2. Analyser (proba × impact)</span><span class="arr">→</span>
+    <span class="step">3. Agir (planifier)</span><span class="arr">→</span>
+    <span class="step">4. Suivre</span>
+  </div>
+  <div class="tbl-wrap"><table>
+    <tr><th>Étape</th><th>Objectif</th><th>Méthodes</th></tr>
+    <tr><td>Identifier</td><td>Repérer tous les risques possibles</td><td>Brainstorming, REX, projets similaires, check-list</td></tr>
+    <tr><td>Analyser</td><td>Évaluer probabilité & impact</td><td>Échelles faible/moyen/élevé → prioriser</td></tr>
+    <tr><td>Planifier / Agir</td><td>Définir des solutions</td><td>Prévention, correction, plan B (contingence)</td></tr>
+    <tr><td>Suivre</td><td>Surveiller & adapter</td><td>Suivi régulier, mise à jour, ajustement</td></tr>
+  </table></div>
+  <p>La gestion des risques est <b>anticipative, continue et structurée</b>.</p>
+
+  <h4>La matrice des risques (Probabilité × Impact)</h4>
+  <div class="tbl-wrap"><table>
+    <tr><th>Zone</th><th>Signification</th><th>Action</th></tr>
+    <tr><td>🟢 Verte</td><td>Faible risque</td><td>Surveillance simple</td></tr>
+    <tr><td>🟠 Orange</td><td>Risque moyen</td><td>Actions recommandées</td></tr>
+    <tr><td>🔴 Rouge</td><td>Risque élevé</td><td>Action prioritaire immédiate</td></tr>
+  </table></div>
+  <div class="box clair"><span class="lbl">Règle de lecture</span> Forte probabilité + fort impact = <b>critique</b> (rouge). Faible + faible = <b>secondaire</b> (vert). <b>Plus un risque est probable ET impactant, plus il est prioritaire.</b></div>
+
+  <h3>8. Apprentissage organisationnel — le REX</h3>
+  <p>Le <strong>Retour d'Expérience (REX)</strong> : analyser après le projet ce qui a marché / pas marché, et pourquoi. <b>Sans REX</b> : on répète les erreurs. <b>Avec REX</b> : amélioration continue et capitalisation. Méthodes : réunion de clôture, questionnaire, analyse des résultats (objectifs vs résultats).</p>
+
+  <h3>9. Facteurs clés de succès (FCS) vs facteurs d'échec</h3>
+  <div class="grid g2">
+    <div class="card"><h4>✅ Facteurs de succès</h4><ul><li>Objectifs clairs</li><li>Leadership efficace</li><li>Communication fluide</li><li>Gestion des risques</li><li>Équipe compétente & engagée</li><li>Suivi & pilotage</li></ul></div>
+    <div class="card"><h4>❌ Facteurs d'échec</h4><ul><li>Mauvaise communication</li><li>Objectifs flous</li><li>Manque de leadership</li><li>Mauvaise gestion des risques</li><li>Conflits non gérés</li></ul></div>
+  </div>
+  <div class="box key"><span class="lbl">🔑 Phrase à retenir</span> Les projets sont <b>avant tout humains</b>. Le succès = un <b>équilibre</b> entre organisation, compétences, communication et leadership.</div>
+</section>
+
+<!-- ============================ EXOS ============================ -->
+<section class="tab" id="exos">
+  <h2 class="chap">📝 Exercices types (d'après les TD)</h2>
+  <p class="lead">Les TD sont des <b>études de cas</b> : on te donne un projet réel et tu appliques le cours. Voici la <b>méthode de résolution</b> + des corrigés modèles. Clique sur chaque question pour voir la réponse.</p>
+
+  <div class="box key"><span class="lbl">🧠 Méthode générale pour toute étude de cas</span>
+  <ol>
+    <li><b>Définir le projet</b> : objectif principal, livrables, indicateurs de succès</li>
+    <li><b>Identifier les parties prenantes</b> (internes/externes) + leur pouvoir/intérêt</li>
+    <li><b>Analyser la complexité & les contraintes</b> (triangle coût/délai/qualité)</li>
+    <li><b>Choisir une organisation / méthode</b> et <b>justifier</b></li>
+    <li><b>Identifier les risques</b> et proposer des actions</li>
+    <li><b>Proposer une gouvernance & un pilotage</b></li>
+  </ol></div>
+
+  <h3>TD 01 — Cas « SmartCampus Mobility » (Ch.1 & 2)</h3>
+  <p class="lead" style="margin-bottom:10px"><em>Plateforme de mobilité pour un campus de 10 000 étudiants. 6 mois, 180 000 €. Tensions : IT veut développer en interne, direction veut externaliser, budget limité.</em></p>
+
+  <details><summary><span class="qn">Q1</span> Définir clairement le projet (objectif, livrables, indicateurs).</summary>
+  <div class="answer">
+    <p><strong>Objectif principal :</strong> développer une plateforme numérique intelligente de mobilité pour désengorger le campus (covoiturage, optimisation parking, intégration transports publics, prédiction des flux).</p>
+    <p><strong>Livrables attendus :</strong> cahier des charges, application mobile fonctionnelle, algorithme d'optimisation des places, système de capteurs IoT installé, documentation & formation.</p>
+    <p><strong>Indicateurs de succès :</strong> taux de réduction des voitures/saturation parking, nombre d'utilisateurs actifs de l'app, respect du budget (180 k€) et du délai (6 mois), satisfaction étudiants.</p>
+  </div></details>
+
+  <details><summary><span class="qn">Q2</span> Identifier & classer les parties prenantes.</summary>
+  <div class="answer">
+    <p><strong>Internes :</strong> direction du campus (sponsor), service informatique, chef de projet, équipe (4 dev, 1 data scientist, 1 UX).</p>
+    <p><strong>Externes :</strong> étudiants (utilisateurs finaux), prestataire externe éventuel, opérateurs de transports publics, fournisseurs de capteurs IoT.</p>
+    <p><strong>Analyse pouvoir/intérêt :</strong> Direction = pouvoir élevé + intérêt élevé (gérer de près) ; étudiants = pouvoir faible + intérêt élevé (tenir informés) ; service IT = acteur clé car en tension sur le « make or buy ».</p>
+  </div></details>
+
+  <details><summary><span class="qn">Q3</span> Identifier les principaux risques.</summary>
+  <div class="answer">
+    <ul>
+      <li><strong>Technologiques :</strong> complexité des algorithmes d'optimisation, fiabilité des capteurs IoT, intégration des données de géolocalisation.</li>
+      <li><strong>Organisationnels :</strong> conflit interne/externe (IT veut développer, direction veut externaliser), budget limité vs ambition, délai court (6 mois).</li>
+      <li><strong>Humains :</strong> résistance du service IT, faible adoption par les étudiants si l'app n'est pas ergonomique.</li>
+    </ul>
+  </div></details>
+
+  <details><summary><span class="qn">Q4</span> Proposer une organisation projet et la justifier.</summary>
+  <div class="answer">
+    <p><strong>Choix recommandé : organisation par projet (équipe dédiée)</strong> ou <strong>matricielle</strong>.</p>
+    <p><strong>Justification :</strong> le délai est court (6 mois) et le projet est transversal (mobilité + IT + data + UX). Une <b>équipe dédiée</b> donne au chef de projet une <b>autorité forte</b>, une communication directe et une décision rapide — essentiel vu les tensions. Le mode <b>fonctionnel</b> est à écarter (chef de projet trop faible, coordination lente). Vu le budget limité, une variante matricielle peut permettre de mutualiser certaines ressources IT internes.</p>
+  </div></details>
+
+  <h3>TD 02 — Cas 05 « Logiciel de gestion des stocks » (Ch.3 & 4)</h3>
+  <p class="lead" style="margin-bottom:10px"><em>TechParts Industries développe un logiciel interne de gestion de stocks. 9 mois, 200 000 €. Problèmes : nouvelles demandes non prévues, specs mal interprétées, retards.</em> <b>Ce sont les vraies questions du TD.</b></p>
+
+  <details><summary><span class="qn">1</span> Objectif principal du projet & importance pour l'entreprise.</summary>
+  <div class="answer">
+    <p><strong>Objectif :</strong> développer un logiciel interne de gestion des stocks permettant de suivre les niveaux en temps réel, enregistrer entrées/sorties, gérer les transferts entre entrepôts, produire des rapports et améliorer l'approvisionnement.</p>
+    <p><strong>Importance :</strong> l'organisation actuelle (tableurs + vieux logiciels) crée des erreurs d'inventaire, un manque de visibilité et des ruptures qui perturbent la production. Le nouveau système améliore l'efficacité opérationnelle, logistique et financière.</p>
+  </div></details>
+
+  <details><summary><span class="qn">2</span> Contrainte de calendrier et son importance.</summary>
+  <div class="answer">
+    <p><strong>Contrainte :</strong> le système doit être en service <b>avant le prochain exercice comptable, dans 9 mois</b>.</p>
+    <p><strong>Importance :</strong> l'entreprise veut utiliser le système dès le début de la nouvelle année comptable pour améliorer la gestion financière et logistique. Rater cette échéance ferait perdre un an d'usage → contrainte de <b>délai</b> forte dans le triangle.</p>
+  </div></details>
+
+  <details><summary><span class="qn">3</span> Les 3 contraintes fondamentales + exemples du texte.</summary>
+  <div class="answer">
+    <ul>
+      <li><strong>Coût :</strong> budget de <b>200 000 €</b> (dev, tests, installation, formation).</li>
+      <li><strong>Délai :</strong> mise en service dans <b>9 mois</b> avant l'exercice comptable.</li>
+      <li><strong>Qualité :</strong> fiabilité du logiciel, compatibilité avec les procédures existantes, conformité aux besoins des utilisateurs (validée par le responsable qualité).</li>
+    </ul>
+  </div></details>
+
+  <details><summary><span class="qn">4</span> Périmètre initial & demandes d'extension (scope creep).</summary>
+  <div class="answer">
+    <p><strong>Périmètre initial :</strong> suivi entrées/sorties de stock, gestion des niveaux, gestion des transferts entre entrepôts, production de rapports.</p>
+    <p><strong>Demandes d'extension (scope creep) :</strong> système d'alerte automatique à seuil critique, module d'analyse statistique des mouvements, intégration avec d'autres systèmes informatiques. Ces demandes <b>non prévues</b> risquent d'entraîner retards et dépassements — à contrôler via une gestion des changements.</p>
+  </div></details>
+
+  <details><summary><span class="qn">5</span> Proposer au moins 4 livrables.</summary>
+  <div class="answer">
+    <ul>
+      <li>Cahier des charges (Phase 1 – analyse des besoins)</li>
+      <li>Document de conception / architecture du logiciel (Phase 2)</li>
+      <li>Logiciel développé (version testable puis finale)</li>
+      <li>Rapport de tests & validation</li>
+      <li>Système déployé + support de formation des utilisateurs</li>
+    </ul>
+  </div></details>
+
+  <details><summary><span class="qn">6</span> Acteurs du projet & rôle du chef de projet.</summary>
+  <div class="answer">
+    <p><strong>Côté entreprise :</strong> directeur des opérations (commanditaire/sponsor), responsable logistique (définit les besoins), responsables d'entrepôts (utilisateurs principaux).</p>
+    <p><strong>Côté technique :</strong> chef de projet informatique, équipe de développeurs, responsable qualité.</p>
+    <p><strong>Rôle du chef de projet :</strong> pilotage global, coordination entre équipes techniques et utilisateurs, suivi délais/coûts/qualité, gestion des demandes d'évolution et des difficultés.</p>
+  </div></details>
+
+  <details><summary><span class="qn">7</span> Difficultés rencontrées & pourquoi elles créent des écarts.</summary>
+  <div class="answer">
+    <p><strong>Difficultés :</strong> demandes de nouvelles fonctionnalités non prévues (scope creep), specs techniques mal interprétées par les développeurs, fonctionnalités ne correspondant pas aux attentes lors des premiers tests, retards.</p>
+    <p><strong>Pourquoi des écarts :</strong> chaque ajout/incompréhension augmente la charge de travail et le temps → écart de <b>délai</b> ; les reprises coûtent → écart de <b>coût</b> ; les fonctionnalités inadaptées → écart de <b>qualité</b>. On s'éloigne du référentiel initial.</p>
+  </div></details>
+
+  <details><summary><span class="qn">8</span> Proposer 3 indicateurs de performance.</summary>
+  <div class="answer">
+    <ul>
+      <li><strong>Délai :</strong> taux d'avancement des tâches / respect des jalons de chaque phase.</li>
+      <li><strong>Coût :</strong> budget consommé vs budget prévu (écart de coût).</li>
+      <li><strong>Qualité :</strong> nombre d'anomalies détectées en test / taux de conformité des fonctionnalités aux besoins.</li>
+    </ul>
+  </div></details>
+
+  <details><summary><span class="qn">9</span> Phases du cycle de vie & importance des tests.</summary>
+  <div class="answer">
+    <p><strong>Phases :</strong> 1) Analyse des besoins → 2) Conception → 3) Développement → 4) Tests et validation → 5) Déploiement. Chaque phase produit un livrable validé avant de passer à la suivante.</p>
+    <p><strong>Importance des tests :</strong> ils vérifient que le logiciel répond aux besoins et fonctionne correctement avant la mise en service. Ils détectent les anomalies tôt, réduisent le risque d'un système défaillant en production et évitent des corrections tardives coûteuses.</p>
+  </div></details>
+
+  <details><summary><span class="qn">10</span> Principe du Cycle en V & application au cas.</summary>
+  <div class="answer">
+    <p><strong>Principe :</strong> chaque phase de conception (descente) est associée à une phase de test (montée), avec validation à chaque niveau.</p>
+    <p><strong>Application :</strong> Analyse des besoins ↔ Tests d'acceptation par les responsables d'entrepôts ; Spécifications ↔ Tests système ; Conception ↔ Tests d'intégration (entre entrepôts) ; Développement ↔ Tests unitaires. Cela garantit que le logiciel livré est conforme aux besoins réels — utile ici puisque des specs avaient été mal interprétées.</p>
+  </div></details>
+
+  <details><summary><span class="qn">11</span> Décisions pour respecter délais / coûts / qualité.</summary>
+  <div class="answer">
+    <ul>
+      <li><strong>Délais :</strong> geler le périmètre (refuser ou reporter les nouvelles fonctionnalités en phase 2), prioriser l'essentiel (MVP), replanifier avec des jalons de suivi.</li>
+      <li><strong>Coûts :</strong> suivi budgétaire régulier, arbitrages via le comité de pilotage, éviter les reprises en clarifiant les specs en amont.</li>
+      <li><strong>Qualité :</strong> renforcer les tests (unitaires, fonctionnels, validation direction), impliquer les utilisateurs tôt (réunions de suivi fréquentes) pour éviter les écarts d'interprétation.</li>
+    </ul>
+    <p><em>Justification :</em> ces décisions rétablissent l'équilibre du triangle et remettent le projet sous contrôle via un pilotage renforcé.</p>
+  </div></details>
+
+  <h3>TD 03 — Cas 03 « Maintenance prédictive industrielle » (Ch.5 & 6)</h3>
+  <p class="lead" style="margin-bottom:10px"><em>IndusTech met en place un système IoT + IA de maintenance prédictive. 12 mois, 900 000 €. Complexité et incertitude élevées, données de mauvaise qualité, résistance des techniciens, écart culturel data/maintenance.</em></p>
+
+  <details><summary><span class="qn">Q1</span> Quelle méthode choisir (classique / agile / hybride) et pourquoi ?</summary>
+  <div class="answer">
+    <p><strong>Choix recommandé : approche HYBRIDE.</strong></p>
+    <p><strong>Justification :</strong> le projet a une <b>forte incertitude fonctionnelle</b> (performance des modèles prédictifs non garantie au départ) → cela plaide pour de l'<b>agile</b> sur les phases expérimentales (développement itératif des modèles de data science, tests fréquents). Mais il y a aussi de <b>fortes contraintes de fiabilité</b> (les erreurs impactent la production) → cela plaide pour des phases de <b>validation et déploiement structurées</b>. L'hybride combine : sprints agiles pour l'expérimentation IA + jalons classiques pour l'intégration et la mise en production.</p>
+  </div></details>
+
+  <details><summary><span class="qn">Q2</span> Analyser les facteurs humains & conflits potentiels.</summary>
+  <div class="answer">
+    <ul>
+      <li><strong>Écart culturel :</strong> data scientists (approche expérimentale) vs techniciens de maintenance (approche terrain, référentiels différents).</li>
+      <li><strong>Résistance au changement :</strong> les techniciens se méfient des recommandations des algorithmes (perçues comme abstraites).</li>
+      <li><strong>Conflits potentiels :</strong> techniques (choix des modèles), organisationnels (répartition data/opérationnel), relationnels (méfiance).</li>
+      <li><strong>Rôle du chef de projet :</strong> médiateur — favoriser le dialogue, clarifier les rôles, impliquer les techniciens tôt, valoriser les résultats concrets pour renforcer la confiance et l'adhésion.</li>
+    </ul>
+  </div></details>
+
+  <details><summary><span class="qn">Q3</span> Identifier les risques et les positionner (matrice).</summary>
+  <div class="answer">
+    <div class="tbl-wrap"><table>
+      <tr><th>Risque</th><th>Probabilité</th><th>Impact</th><th>Priorité</th></tr>
+      <tr><td>Qualité insuffisante des données</td><td>Élevée</td><td>Élevé</td><td>🔴 Critique</td></tr>
+      <tr><td>Performance limitée des modèles</td><td>Moyenne</td><td>Élevé</td><td>🟠 Moyenne-haute</td></tr>
+      <tr><td>Rejet par les utilisateurs (techniciens)</td><td>Élevée</td><td>Élevé</td><td>🔴 Critique</td></tr>
+      <tr><td>Problèmes d'intégration technique</td><td>Moyenne</td><td>Moyen</td><td>🟠 Moyenne</td></tr>
+      <tr><td>Impact sur la production</td><td>Faible</td><td>Élevé</td><td>🟠 À surveiller</td></tr>
+    </table></div>
+    <p><strong>Mesures :</strong> plan de nettoyage/qualité des données en amont ; conduite du changement (formation, implication des techniciens) ; approche progressive (pilote sur une ligne avant généralisation) ; plan B en cas de défaillance des modèles.</p>
+  </div></details>
+
+  <details><summary><span class="qn">Q4</span> Facteurs clés de réussite du projet.</summary>
+  <div class="answer">
+    <ul>
+      <li>Collaboration interdisciplinaire (data + maintenance + production)</li>
+      <li>Acceptation par les utilisateurs (conduite du changement)</li>
+      <li>Qualité des données (condition sine qua non des modèles)</li>
+      <li>Adaptation progressive des solutions (itérations, pilote)</li>
+      <li>Leadership et communication du chef de projet ; suivi/actualisation continue des risques</li>
+    </ul>
+  </div></details>
+</section>
+
+<!-- ============================ EXAM ============================ -->
+<section class="tab" id="exam">
+  <h2 class="chap">🎯 Examen Blanc — Partie I (Questions de compréhension)</h2>
+  <p class="lead">Les 20 questions de l'examen blanc, avec des <b>réponses rédigées type</b>. Elles couvrent tout le programme. Clique pour révéler chaque réponse — idéal pour t'auto-tester.</p>
+
+  <details><summary><span class="qn">1</span> Définissez ce qu'est un projet et expliquez ses principales caractéristiques (temporalité, unicité, objectifs).</summary>
+  <div class="answer"><p>Un <strong>projet</strong> est une initiative <b>temporaire</b> visant à produire un produit, service ou résultat <b>unique</b>, avec des <b>objectifs précis</b>, dans un délai et un budget définis. Caractéristiques :</p>
+  <ul><li><strong>Temporalité :</strong> il a un début et une fin (≠ activité continue).</li><li><strong>Unicité :</strong> il produit quelque chose de nouveau, non répétitif.</li><li><strong>Objectifs :</strong> il vise un résultat précis en respectant coût, délai et qualité.</li></ul>
+  <p>Selon l'ISO 21500 : « un ensemble unique de processus coordonnés, avec des dates de début et de fin, pour atteindre des objectifs. »</p></div></details>
+
+  <details><summary><span class="qn">2</span> Distinguez un projet d'une activité opérationnelle.</summary>
+  <div class="answer"><p>L'<strong>activité opérationnelle</strong> est <b>répétitive et continue</b>, vise à assurer le fonctionnement courant, avec des processus stabilisés et des résultats prévisibles (ex : production, maintenance, paie).</p>
+  <p>Le <strong>projet</strong> est <b>temporaire et unique</b>, vise à créer quelque chose de nouveau, avec une forte incertitude et une coordination pluridisciplinaire (ex : lancer un nouveau produit, construire un bâtiment).</p></div></details>
+
+  <details><summary><span class="qn">3</span> Expliquez pourquoi le management de projet est devenu essentiel dans les organisations modernes.</summary>
+  <div class="answer"><p>Parce que les organisations doivent : mettre en œuvre leur <b>stratégie</b> et générer des revenus (cycles de vie produits plus courts), maîtriser l'<b>innovation</b>, transformer leurs modèles opérationnels, s'adapter aux <b>contraintes réglementaires</b>. Les projets sont de plus en plus <b>complexes et transversaux</b> (plus de fonctions impliquées, exécution plus rapide). Le management de projet apporte la <b>coordination</b> et la <b>coopération</b> nécessaires pour transformer une idée en réalisation concrète dans un environnement incertain.</p></div></details>
+
+  <details><summary><span class="qn">4</span> Présentez les différentes typologies de projets.</summary>
+  <div class="answer"><p>Par <strong>objectif</strong> : projets d'<b>optimisation</b> (améliorer l'existant) vs projets de <b>conception</b> (créer du nouveau).</p>
+  <p>Par <strong>domaine/nature</strong> (typologie AFNOR) : projets industriels, informatiques, organisationnels, stratégiques…</p>
+  <p>Par <strong>complexité</strong> : selon taille, enjeux, incertitude, récurrence.</p></div></details>
+
+  <details><summary><span class="qn">5</span> Définissez les parties prenantes d'un projet et expliquez leur importance.</summary>
+  <div class="answer"><p>Les <strong>parties prenantes (stakeholders)</strong> sont l'ensemble des personnes, groupes ou organisations qui <b>participent</b> au projet, <b>l'influencent</b> ou <b>sont impactés</b> par ses résultats.</p>
+  <p><strong>Importance :</strong> leurs attentes et intérêts influencent les décisions et l'avancement. Bien les identifier permet d'anticiper les résistances/conflits, d'améliorer la communication et de favoriser l'adhésion → condition de réussite.</p></div></details>
+
+  <details><summary><span class="qn">6</span> Distinguez les parties prenantes internes et externes.</summary>
+  <div class="answer"><p><strong>Internes</strong> (dans l'organisation) : direction, sponsor, chef de projet, équipe projet, départements fonctionnels (marketing, IT, finance).</p>
+  <p><strong>Externes</strong> (hors organisation) : clients, utilisateurs finaux, fournisseurs & partenaires, sous-traitants, autorités réglementaires.</p></div></details>
+
+  <details><summary><span class="qn">7</span> Présentez les rôles du sponsor, du chef de projet et de l'équipe projet.</summary>
+  <div class="answer"><ul>
+    <li><strong>Sponsor (commanditaire) :</strong> initiateur, détient le budget ; définit les objectifs stratégiques, valide budget & ressources, prend les décisions majeures, garantit l'alignement stratégique.</li>
+    <li><strong>Chef de projet (maître d'œuvre) :</strong> pilote le projet ; planifie, coordonne l'équipe, suit délais/coûts/qualité, gère les risques, communique.</li>
+    <li><strong>Équipe projet :</strong> réalise les tâches, apporte les compétences techniques, produit les livrables, respecte les délais.</li>
+  </ul></div></details>
+
+  <details><summary><span class="qn">8</span> Expliquez les différents modes d'organisation d'un projet (fonctionnelle, matricielle, par projet).</summary>
+  <div class="answer"><ul>
+    <li><strong>Fonctionnelle :</strong> entreprise organisée par départements ; chef de projet à autorité <b>faible</b>. ➕ spécialisation, stabilité ➖ coordination difficile.</li>
+    <li><strong>Matricielle :</strong> combine fonctionnel + projet ; l'équipe dépend du responsable fonctionnel ET du chef de projet (autorité <b>partagée</b>). ➕ meilleure utilisation des ressources, collaboration ➖ conflits d'autorité, complexité.</li>
+    <li><strong>Par projet :</strong> ressources entièrement <b>dédiées</b> ; chef de projet à autorité <b>forte</b>. ➕ communication rapide, décision efficace, équipe impliquée ➖ coût élevé, duplication.</li>
+  </ul></div></details>
+
+  <details><summary><span class="qn">9</span> Définissez la gouvernance d'un projet et son rôle.</summary>
+  <div class="answer"><p>La <strong>gouvernance</strong> est l'ensemble des <b>structures, règles et mécanismes de décision</b> qui permettent de piloter le projet et de garantir son alignement avec la stratégie. Elle définit les responsabilités, les processus de décision, les mécanismes de contrôle et la communication. Instances : sponsor, comité de pilotage, chef de projet. <strong>Rôle :</strong> améliorer la prise de décision, assurer la transparence, contrôler les risques et garantir l'atteinte des objectifs.</p></div></details>
+
+  <details><summary><span class="qn">10</span> Expliquez le triangle du projet (coût / délai / qualité).</summary>
+  <div class="answer"><p>Le <strong>triangle du projet</strong> représente les trois contraintes fondamentales de tout projet :</p>
+  <ul><li><strong>Coût :</strong> ressources financières (budget).</li><li><strong>Délai :</strong> durée de réalisation (planning, jalons).</li><li><strong>Qualité (+ périmètre) :</strong> conformité aux exigences (cahier des charges).</li></ul>
+  <p>La mission du chef de projet est de <b>maintenir l'équilibre</b> entre ces trois contraintes pour assurer la réussite. (Variante : le « Quadruple Constraint » ajoute la satisfaction du client.)</p></div></details>
+
+  <details><summary><span class="qn">11</span> Montrez les interdépendances entre les contraintes du triangle.</summary>
+  <div class="answer"><p>Les trois contraintes sont <b>interdépendantes</b> : modifier l'une impacte les deux autres.</p>
+  <ul><li>Réduire les <b>délais</b> → augmenter les coûts (plus de ressources) ou réduire la qualité.</li><li>Réduire les <b>coûts</b> → affecter la qualité ou allonger les délais.</li><li>Améliorer la <b>qualité</b> → augmenter les coûts et/ou les délais.</li></ul>
+  <p>Le chef de projet doit donc réaliser des <b>arbitrages</b> pour trouver le meilleur compromis.</p></div></details>
+
+  <details><summary><span class="qn">12</span> Définissez la notion de périmètre (scope) et de livrables.</summary>
+  <div class="answer"><p>Le <strong>périmètre (scope)</strong> correspond à l'ensemble des travaux, activités et résultats à réaliser ; il définit ce qui est <b>inclus</b> et <b>exclu</b>. Une mauvaise maîtrise entraîne le <b>scope creep</b> (dérive → retards, surcoûts).</p>
+  <p>Un <strong>livrable</strong> est un résultat <b>concret et mesurable</b> produit pendant ou à la fin du projet (document, produit, service, système). Il sert de <b>point de contrôle</b> : livrables intermédiaires (prototype, rapport) et livrable final (produit en production).</p></div></details>
+
+  <details><summary><span class="qn">13</span> Expliquez le rôle des indicateurs de performance dans le pilotage.</summary>
+  <div class="answer"><p>Les <strong>indicateurs (KPI)</strong> sont des mesures qui évaluent l'avancement et la performance du projet. Ils donnent une vision <b>claire et objective</b> et permettent de : suivre l'évolution, détecter rapidement les dérives, améliorer la communication avec les parties prenantes et faciliter la prise de décision. On distingue les indicateurs de <b>délai</b> (taux d'avancement, jalons), de <b>coût</b> (budget consommé, écart) et de <b>qualité</b> (anomalies, conformité, satisfaction).</p></div></details>
+
+  <details><summary><span class="qn">14</span> Présentez les phases du cycle de vie d'un projet.</summary>
+  <div class="answer"><p>Cinq phases (vocabulaire gestion de projet) : <strong>Initiation → Planification → Exécution → Contrôle/Suivi → Clôture</strong>.</p>
+  <p>Vocabulaire cycle de vie : <strong>Pré-étude → Étude → Réalisation → Exploitation → Désinvestissement</strong>.</p>
+  <p>Chaque phase structure et contrôle l'avancement : identifier le besoin, planifier, produire les livrables, suivre les écarts, puis livrer et capitaliser (leçons apprises).</p></div></details>
+
+  <details><summary><span class="qn">15</span> Expliquez le principe du Cycle en V et son fonctionnement.</summary>
+  <div class="answer"><p>Le <strong>Cycle en V</strong> est un modèle séquentiel où <b>chaque phase de conception (branche descendante) correspond à une phase de test (branche ascendante)</b> :</p>
+  <ul><li>Analyse des besoins ↔ Tests d'acceptation</li><li>Spécifications ↔ Tests système</li><li>Conception technique ↔ Tests d'intégration</li><li>Développement ↔ Tests unitaires</li></ul>
+  <p>Principe clé : chaque étape doit être <b>validée avant de passer à la suivante</b>, ce qui garantit qualité et conformité. Adapté aux projets à exigences stables et critiques (aéronautique, médical, automobile).</p></div></details>
+
+  <details><summary><span class="qn">16</span> Comparez les approches classiques (Cycle en V) et les méthodes agiles.</summary>
+  <div class="answer"><div class="tbl-wrap"><table>
+    <tr><th>Critère</th><th>Cycle en V</th><th>Agile</th></tr>
+    <tr><td>Planification</td><td>Détaillée au début</td><td>Progressive</td></tr>
+    <tr><td>Besoins</td><td>Définis dès le départ</td><td>Évolutifs</td></tr>
+    <tr><td>Livraison</td><td>À la fin</td><td>Progressive (sprints)</td></tr>
+    <tr><td>Changement</td><td>Difficile</td><td>Adaptation continue</td></tr>
+    <tr><td>Client</td><td>Faible implication</td><td>Forte collaboration</td></tr>
+    <tr><td>Flexibilité</td><td>Faible</td><td>Élevée</td></tr>
+  </table></div><p>Chaque approche convient à des contextes différents ; l'hybride combine les deux.</p></div></details>
+
+  <details><summary><span class="qn">17</span> Présentez les principes fondamentaux des méthodes agiles.</summary>
+  <div class="answer"><p>Issus du <strong>Manifeste Agile (2001)</strong>, les 4 valeurs : les <b>individus et interactions</b> > processus/outils ; un <b>produit fonctionnel</b> > documentation ; la <b>collaboration client</b> > négociation contractuelle ; l'<b>adaptation au changement</b> > suivi d'un plan.</p>
+  <p>Principes clés : livraison rapide et régulière, acceptation du changement (même tardif), collaboration continue avec le client, équipes auto-organisées, amélioration continue.</p></div></details>
+
+  <details><summary><span class="qn">18</span> Expliquez la notion d'itération dans les méthodes agiles.</summary>
+  <div class="answer"><p>Contrairement au modèle traditionnel où le produit est livré à la fin, l'agile repose sur un développement <strong>itératif et incrémental</strong> : le projet est divisé en petites périodes appelées <b>itérations</b> ou <b>sprints</b> (1 à 4 semaines). Chaque itération produit une <b>version fonctionnelle</b> du produit, testée par les utilisateurs. Le produit s'enrichit progressivement (incrément) et le feedback rapide permet de corriger tôt et à moindre coût.</p></div></details>
+
+  <details><summary><span class="qn">19</span> Définissez le rôle du leadership dans un projet.</summary>
+  <div class="answer"><p>Le <strong>leadership</strong> est la capacité du chef de projet à <b>guider, motiver et coordonner</b> l'équipe vers l'objectif. Au-delà de la planification, il doit définir et communiquer la vision, organiser le travail, motiver les membres et gérer les conflits. Il existe plusieurs <b>styles</b> (directif en urgence, participatif pour l'innovation, coach pour développer les compétences) : un bon leader <b>adapte son style</b> au contexte et à la maturité de l'équipe. Un bon leadership améliore la cohésion, l'engagement et la performance.</p></div></details>
+
+  <details><summary><span class="qn">20</span> Présentez deux facteurs humains clés influençant la réussite d'un projet.</summary>
+  <div class="answer"><p><strong>1. La communication :</strong> c'est le « système nerveux » du projet. Elle partage l'information, coordonne les activités, évite les malentendus et aligne les acteurs. Une mauvaise communication est l'une des <b>premières causes d'échec</b>.</p>
+  <p><strong>2. La motivation / coopération :</strong> une équipe motivée et qui coopère (confiance, rôles clairs, objectifs communs) produit un travail de meilleure qualité, plus productif et respectueux des délais. « Coopération = performance ; manque de coopération = échec. »</p>
+  <p><em>(Autres facteurs acceptés : leadership, confiance, gestion des conflits.)</em></p></div></details>
+
+  <div class="box key"><span class="lbl">💡 Conseil méthode pour l'examen</span> Pour chaque question de définition : 1) donne la <b>définition</b> précise, 2) <b>explique/développe</b> avec les composantes, 3) ajoute un <b>exemple</b> concret. C'est ce qui distingue une bonne copie.</div>
+</section>
+
+<!-- ============================ GLOSSAIRE ============================ -->
+<section class="tab" id="gloss">
+  <h2 class="chap">📖 Glossaire des termes clés</h2>
+  <p class="lead">Tous les termes du cours, définis en une phrase. Utilise la recherche (onglet Vue d'ensemble) pour retrouver un mot rapidement.</p>
+
+  <div class="toc">
+    <a href="#g-a">A-C</a><a href="#g-d">D-G</a><a href="#g-i">I-M</a><a href="#g-n">N-R</a><a href="#g-s">S-W</a>
+  </div>
+
+  <h3 id="g-a" class="anchor">A → C</h3>
+  <div class="tbl-wrap"><table>
+    <tr><th>Terme</th><th>Définition</th></tr>
+    <tr><td><strong>AFNOR</strong></td><td>Organisme de normalisation français ; définit le projet comme une démarche spécifique structurant une réalité à venir.</td></tr>
+    <tr><td><strong>Agile (méthode)</strong></td><td>Approche flexible et itérative, centrée sur la collaboration et l'adaptation au changement (Manifeste 2001).</td></tr>
+    <tr><td><strong>Arbitrage</strong></td><td>Choix du meilleur compromis entre contraintes conflictuelles (coût, délai, qualité).</td></tr>
+    <tr><td><strong>Avant-projet</strong></td><td>Phase de préparation/cadrage : objectifs, périmètre, ressources, faisabilité (business case).</td></tr>
+    <tr><td><strong>Cahier des charges</strong></td><td>Document formalisant les besoins, fonctions, contraintes et critères de qualité du projet.</td></tr>
+    <tr><td><strong>Chef de projet</strong></td><td>Maître d'œuvre ; pilote le projet (planification, coordination, suivi, risques, communication).</td></tr>
+    <tr><td><strong>Chemin critique</strong></td><td>Suite de tâches à marge nulle = le chemin le plus long ; détermine la durée totale du projet.</td></tr>
+    <tr><td><strong>Comité de pilotage</strong></td><td>Instance de gouvernance qui supervise, arbitre et valide l'avancement (Steering Committee).</td></tr>
+    <tr><td><strong>Complexité</strong></td><td>Niveau de difficulté d'un projet selon taille, objectif, enjeux et récurrence.</td></tr>
+    <tr><td><strong>Coût</strong></td><td>Ensemble des ressources financières nécessaires (RH, équipements, sous-traitants).</td></tr>
+    <tr><td><strong>CPM</strong></td><td>Critical Path Method ; méthode du chemin critique (développée par DuPont, 1957).</td></tr>
+    <tr><td><strong>Cycle en V</strong></td><td>Modèle séquentiel associant chaque phase de conception à une phase de test.</td></tr>
+  </table></div>
+
+  <h3 id="g-d" class="anchor">D → G</h3>
+  <div class="tbl-wrap"><table>
+    <tr><th>Terme</th><th>Définition</th></tr>
+    <tr><td><strong>Daily Scrum</strong></td><td>Réunion quotidienne de 15 min max pour coordonner l'équipe (fait hier / aujourd'hui / obstacles).</td></tr>
+    <tr><td><strong>Délai</strong></td><td>Durée nécessaire à la réalisation ; défini par planning, jalons, dates de livraison.</td></tr>
+    <tr><td><strong>Désinvestissement</strong></td><td>Fin de vie du projet ; peut alimenter la pré-étude d'un projet suivant.</td></tr>
+    <tr><td><strong>Écart</strong></td><td>Différence entre ce qui était prévu (référentiel) et ce qui est réellement réalisé.</td></tr>
+    <tr><td><strong>Équipe projet</strong></td><td>Ensemble des personnes (souvent pluridisciplinaires) qui réalisent les tâches et produisent les livrables.</td></tr>
+    <tr><td><strong>Étude de faisabilité</strong></td><td>Analyse (technique, économique) déterminant si le projet est réalisable → décision Go/No Go.</td></tr>
+    <tr><td><strong>Gantt (diagramme)</strong></td><td>Planning visuel : tâches en barres horizontales sur un axe de temps.</td></tr>
+    <tr><td><strong>Go / No Go</strong></td><td>Décision de lancer (Go) ou d'abandonner (No Go) le projet après analyse.</td></tr>
+    <tr><td><strong>Gouvernance</strong></td><td>Structures et règles de décision permettant de piloter le projet et de l'aligner sur la stratégie.</td></tr>
+  </table></div>
+
+  <h3 id="g-i" class="anchor">I → M</h3>
+  <div class="tbl-wrap"><table>
+    <tr><th>Terme</th><th>Définition</th></tr>
+    <tr><td><strong>Incrément</strong></td><td>Ajout progressif de fonctionnalités à chaque itération (développement incrémental).</td></tr>
+    <tr><td><strong>Itération / Sprint</strong></td><td>Petite période de travail (1-4 semaines) produisant une version fonctionnelle du produit.</td></tr>
+    <tr><td><strong>Jalon (milestone)</strong></td><td>Étape clé marquant un point de contrôle ou la fin d'une phase.</td></tr>
+    <tr><td><strong>KPI</strong></td><td>Key Performance Indicator ; mesure de l'avancement et de la performance du projet.</td></tr>
+    <tr><td><strong>Leadership</strong></td><td>Capacité à guider, motiver et coordonner l'équipe vers l'objectif.</td></tr>
+    <tr><td><strong>Livrable</strong></td><td>Résultat concret et mesurable produit pendant ou à la fin du projet.</td></tr>
+    <tr><td><strong>Manifeste Agile</strong></td><td>Texte de 2001 (17 experts) définissant 4 valeurs et 12 principes de l'agilité.</td></tr>
+    <tr><td><strong>Marge (totale/libre)</strong></td><td>Temps dont une tâche peut être retardée sans retarder le projet (totale) ou la tâche suivante (libre).</td></tr>
+    <tr><td><strong>Matrice des risques</strong></td><td>Outil visuel classant les risques selon probabilité × impact (zones verte/orange/rouge).</td></tr>
+    <tr><td><strong>MOA / MOE</strong></td><td>Maîtrise d'Ouvrage (client/commanditaire) / Maîtrise d'Œuvre (réalisateur) — doivent être séparées.</td></tr>
+    <tr><td><strong>Matricielle (organisation)</strong></td><td>Structure combinant fonctionnel et projet ; autorité partagée.</td></tr>
+  </table></div>
+
+  <h3 id="g-n" class="anchor">N → R</h3>
+  <div class="tbl-wrap"><table>
+    <tr><th>Terme</th><th>Définition</th></tr>
+    <tr><td><strong>PBS</strong></td><td>Product Breakdown Structure ; décomposition du projet en livrables et sous-livrables.</td></tr>
+    <tr><td><strong>Périmètre (Scope)</strong></td><td>Ensemble des travaux inclus (et exclus) dans le projet.</td></tr>
+    <tr><td><strong>PERT</strong></td><td>Program Evaluation and Review Technique ; réseau de tâches et dépendances (chemin critique).</td></tr>
+    <tr><td><strong>Phase</strong></td><td>Période du projet correspondant à un objectif intermédiaire, souvent close par un livrable.</td></tr>
+    <tr><td><strong>Pilotage</strong></td><td>Suivre, contrôler et ajuster le projet en comparant réel vs prévu.</td></tr>
+    <tr><td><strong>PMBOK</strong></td><td>Project Management Body of Knowledge ; guide de référence du PMI.</td></tr>
+    <tr><td><strong>PMI</strong></td><td>Project Management Institute ; institut créé en 1969 (USA) qui standardise la discipline.</td></tr>
+    <tr><td><strong>Pré-étude</strong></td><td>Première phase : analyse du besoin, opportunité et faisabilité.</td></tr>
+    <tr><td><strong>Product Owner</strong></td><td>Rôle Scrum : représente le client et priorise les fonctionnalités.</td></tr>
+    <tr><td><strong>Qualité</strong></td><td>Niveau de conformité du résultat aux exigences (cahier des charges, specs).</td></tr>
+    <tr><td><strong>Recette</strong></td><td>Validation finale du livrable + procès-verbal de réception (+ garantie).</td></tr>
+    <tr><td><strong>Référentiel initial</strong></td><td>Base de comparaison (technique, financière, organisationnelle) pour piloter.</td></tr>
+    <tr><td><strong>REX</strong></td><td>Retour d'Expérience ; analyse post-projet pour capitaliser et s'améliorer.</td></tr>
+    <tr><td><strong>Risque</strong></td><td>Événement incertain pouvant impacter les objectifs (coût, délai, qualité).</td></tr>
+    <tr><td><strong>ROI</strong></td><td>Return On Investment ; retour sur investissement, critère de décision.</td></tr>
+  </table></div>
+
+  <h3 id="g-s" class="anchor">S → W</h3>
+  <div class="tbl-wrap"><table>
+    <tr><th>Terme</th><th>Définition</th></tr>
+    <tr><td><strong>Scope creep</strong></td><td>Extension incontrôlée du périmètre → retards, surcoûts, surcharge.</td></tr>
+    <tr><td><strong>Scrum</strong></td><td>Méthode agile la plus utilisée : sprints, 3 rôles, 4 cérémonies.</td></tr>
+    <tr><td><strong>Scrum Master</strong></td><td>Rôle Scrum : facilite l'équipe, veille à la méthode, lève les obstacles.</td></tr>
+    <tr><td><strong>Sponsor</strong></td><td>Commanditaire/initiateur ; détient le budget et valide les décisions majeures.</td></tr>
+    <tr><td><strong>Sprint Planning / Review / Retrospective</strong></td><td>Cérémonies Scrum : planifier le sprint / présenter le résultat / améliorer le fonctionnement.</td></tr>
+    <tr><td><strong>Stakeholder</strong></td><td>Partie prenante (voir « parties prenantes »).</td></tr>
+    <tr><td><strong>Triangle du projet</strong></td><td>Modèle des 3 contraintes interdépendantes : coût, délai, qualité (+ périmètre).</td></tr>
+    <tr><td><strong>Waterfall (cascade)</strong></td><td>Approche séquentielle planifiée ; ~80 % des projets ; base de la gestion de projet.</td></tr>
+    <tr><td><strong>WBS</strong></td><td>Work Breakdown Structure ; décomposition hiérarchique du projet (règle des 100 %).</td></tr>
+  </table></div>
+</section>
+
+</main>
+
+<footer>
+  Fiche de révision — Gestion de Projet (APFG62) · Générée à partir des 6 chapitres de cours + 3 TD + examen blanc.<br>
+  💡 Astuce : révise par onglet, puis teste-toi sur l'onglet « 🎯 Examen blanc » en cachant les réponses.
+</footer>
+
+<script>
+  // Tabs
+  const tabs = document.querySelectorAll('#tabs button');
+  const sections = document.querySelectorAll('section.tab');
+  tabs.forEach(btn=>{
+    btn.addEventListener('click',()=>{
+      const id = btn.dataset.tab;
+      tabs.forEach(b=>b.classList.toggle('active', b===btn));
+      sections.forEach(s=>s.classList.toggle('active', s.id===id));
+      window.scrollTo({top:0, behavior:'smooth'});
+    });
+  });
+
+  // Search: highlight + jump to first match's tab
+  const search = document.getElementById('search');
+  function clearMarks(){
+    document.querySelectorAll('mark').forEach(m=>{
+      const t=document.createTextNode(m.textContent); m.parentNode.replaceChild(t,m);
+    });
+  }
+  let searchTimer;
+  search && search.addEventListener('input',e=>{
+    clearTimeout(searchTimer);
+    searchTimer=setTimeout(()=>doSearch(e.target.value.trim()),200);
+  });
+  function doSearch(q){
+    clearMarks();
+    if(q.length<2) return;
+    const rx = new RegExp('('+q.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')+')','gi');
+    let firstTab=null;
+    sections.forEach(sec=>{
+      const walker=document.createTreeWalker(sec, NodeFilter.SHOW_TEXT, {
+        acceptNode:n=> (n.parentNode && ['SCRIPT','STYLE','MARK'].includes(n.parentNode.nodeName))?NodeFilter.FILTER_REJECT: (rx.test(n.textContent)?NodeFilter.FILTER_ACCEPT:NodeFilter.FILTER_REJECT)
+      });
+      const nodes=[]; while(walker.nextNode()) nodes.push(walker.currentNode);
+      nodes.forEach(n=>{
+        const span=document.createElement('span');
+        span.innerHTML=n.textContent.replace(rx,'<mark>$1</mark>');
+        n.parentNode.replaceChild(span,n);
+        if(!firstTab) firstTab=sec.id;
+      });
+    });
+    if(firstTab){
+      tabs.forEach(b=>b.classList.toggle('active', b.dataset.tab===firstTab));
+      sections.forEach(s=>s.classList.toggle('active', s.id===firstTab));
+    }
+  }
+</script>
+</body>
+</html>
