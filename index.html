@@ -116,6 +116,19 @@
   .toc{display:flex; flex-wrap:wrap; gap:8px; margin:10px 0 4px}
   .toc a{font-size:13px; background:var(--panel2); border:1px solid var(--line); padding:5px 11px; border-radius:8px; text-decoration:none; color:var(--muted)}
   .toc a:hover{color:var(--brand); border-color:var(--brand)}
+  .danger{background:linear-gradient(135deg,rgba(220,58,79,.11),rgba(220,58,79,.03)); border-color:rgba(220,58,79,.4)}
+  .danger .lbl{color:var(--danger)}
+  .calc{background:#f6f8ff; border:1px dashed var(--brand); border-radius:8px; padding:10px 14px; margin:8px 0; font-family:"SF Mono",Menlo,Consolas,monospace; font-size:13.5px; color:#2a336e; white-space:pre-wrap}
+  ol{margin:8px 0; padding-left:22px} ol li{margin:6px 0}
+  .qcm-opts{display:flex; flex-direction:column; gap:8px; margin-top:8px}
+  .qcm-opt{text-align:left; cursor:pointer; border:1px solid var(--line); background:var(--panel2); color:var(--ink);
+    padding:11px 14px; border-radius:10px; font-size:14.5px; transition:.12s; font-family:inherit}
+  .qcm-opt:hover:not(:disabled){border-color:var(--brand); background:#edf0fc}
+  .qcm-opt:disabled{cursor:default}
+  .qcm-opt.good{background:rgba(18,138,90,.15); border-color:var(--ok); color:#0c6b44; font-weight:700}
+  .qcm-opt.good::after{content:" ✅"}
+  .qcm-opt.bad{background:rgba(220,58,79,.13); border-color:var(--danger); color:#bd2b40; font-weight:700}
+  .qcm-opt.bad::after{content:" ❌"}
 </style>
 </head>
 <body>
@@ -129,6 +142,7 @@
     <span class="pill">Exemples types</span>
     <span class="pill">Exos corrigés (TD)</span>
     <span class="pill">Examen blanc (20 Q/R)</span>
+    <span class="pill">QCM régénérable</span>
     <span class="pill">Glossaire</span>
   </div>
 </header>
@@ -143,6 +157,7 @@
   <button data-tab="c6">Ch.6 · Humain & Risques</button>
   <button data-tab="exos">📝 Exos types</button>
   <button data-tab="exam">🎯 Examen blanc</button>
+  <button data-tab="qcm">❓ QCM</button>
   <button data-tab="gloss">📖 Glossaire</button>
 </nav>
 
@@ -933,6 +948,74 @@
       <li>Leadership et communication du chef de projet ; suivi/actualisation continue des risques</li>
     </ul>
   </div></details>
+
+  <h3>TD 04 — PERT & chemin critique (exercice de calcul ⭐)</h3>
+  <p class="lead" style="margin-bottom:10px"><em>Un projet est composé de 6 tâches (durées en jours). Calcule les dates au plus tôt / au plus tard, les marges, puis identifie le chemin critique et la durée totale.</em></p>
+  <div class="card">
+    <div class="tbl-wrap"><table>
+      <tr><th>Tâche</th><th>Durée (j)</th><th>Prédécesseur(s)</th></tr>
+      <tr><td>A</td><td>3</td><td>—</td></tr>
+      <tr><td>B</td><td>5</td><td>A</td></tr>
+      <tr><td>C</td><td>2</td><td>A</td></tr>
+      <tr><td>D</td><td>4</td><td>B</td></tr>
+      <tr><td>E</td><td>3</td><td>C</td></tr>
+      <tr><td>F</td><td>2</td><td>D, E</td></tr>
+    </table></div>
+    <p><b>Questions :</b> 1) dates au plus tôt (ES/EF) · 2) dates au plus tard (LS/LF) · 3) marge de chaque tâche · 4) chemin critique &amp; durée totale.</p>
+  </div>
+  <details><summary><span class="qn">✓</span> Voir la correction du TD 04</summary>
+  <div class="answer">
+    <p><b>1) &amp; 2) Dates au plus tôt (aller) puis au plus tard (retour)</b> — EF = ES + durée ; LS = LF − durée.</p>
+    <div class="tbl-wrap"><table>
+      <tr><th>Tâche</th><th>Durée</th><th>ES (tôt)</th><th>EF (tôt)</th><th>LS (tard)</th><th>LF (tard)</th><th>Marge</th></tr>
+      <tr><td><b>A</b></td><td>3</td><td>0</td><td>3</td><td>0</td><td>3</td><td><b>0 🔴</b></td></tr>
+      <tr><td><b>B</b></td><td>5</td><td>3</td><td>8</td><td>3</td><td>8</td><td><b>0 🔴</b></td></tr>
+      <tr><td>C</td><td>2</td><td>3</td><td>5</td><td>7</td><td>9</td><td>4</td></tr>
+      <tr><td><b>D</b></td><td>4</td><td>8</td><td>12</td><td>8</td><td>12</td><td><b>0 🔴</b></td></tr>
+      <tr><td>E</td><td>3</td><td>5</td><td>8</td><td>9</td><td>12</td><td>4</td></tr>
+      <tr><td><b>F</b></td><td>2</td><td>12</td><td>14</td><td>12</td><td>14</td><td><b>0 🔴</b></td></tr>
+    </table></div>
+    <div class="calc">Marge = date au plus tard − date au plus tôt (LS − ES, ou LF − EF)
+A:0  B:0  C:4  D:0  E:4  F:0</div>
+    <p><b>3) &amp; 4) Chemin critique</b> = les tâches à <b>marge nulle</b> :</p>
+    <div class="calc">CHEMIN CRITIQUE : A → B → D → F
+Durée totale = 3 + 5 + 4 + 2 = 14 jours</div>
+    <ul>
+      <li>Les tâches <b>C et E ont 4 jours de marge</b> : elles peuvent glisser jusqu'à 4 j sans retarder le projet.</li>
+      <li>Tout retard sur <b>A, B, D ou F</b> (marge 0) retarde <b>directement</b> tout le projet.</li>
+    </ul>
+    <div class="box key" style="margin-top:8px"><span class="lbl">🔑 Méthode</span> Aller (de gauche à droite) : ES = plus grand EF des prédécesseurs. Retour (de droite à gauche) : LF = plus petit LS des successeurs. Marge nulle = tâche critique.</div>
+  </div></details>
+
+  <h3>TD 05 — Cas « Appli mobile de banque en ligne » (Ch.5 &amp; 6)</h3>
+  <p class="lead" style="margin-bottom:10px"><em>Une néobanque lance une application mobile. Marché très concurrentiel, besoins clients évolutifs, contraintes réglementaires fortes (sécurité, conformité). 10 mois, équipe de 8 personnes.</em></p>
+  <details><summary><span class="qn">Q1</span> Quelle méthode (classique / agile / hybride) et pourquoi ?</summary>
+  <div class="answer">
+    <p><strong>Choix recommandé : approche HYBRIDE.</strong></p>
+    <p><strong>Justification :</strong> les <b>besoins clients évoluent vite</b> et le marché est concurrentiel → l'<b>agile</b> (sprints, feedback fréquent, livraison progressive des fonctionnalités) permet de s'adapter et de sortir vite une première version. Mais les <b>contraintes réglementaires (sécurité, conformité bancaire)</b> exigent de la <b>rigueur et de la traçabilité</b> → phases structurées type Cycle en V pour les modules critiques (paiement, authentification). L'hybride combine les deux.</p>
+  </div></details>
+  <details><summary><span class="qn">Q2</span> Cite 3 parties prenantes et leur position pouvoir/intérêt.</summary>
+  <div class="answer">
+    <ul>
+      <li><b>Direction / sponsor</b> : pouvoir élevé + intérêt élevé → <b>gérer de près</b>.</li>
+      <li><b>Régulateur (autorité bancaire)</b> : pouvoir élevé + intérêt plus faible au quotidien → <b>maintenir satisfait</b> (conformité).</li>
+      <li><b>Utilisateurs finaux (clients)</b> : pouvoir faible + intérêt élevé → <b>tenir informés</b> (tests, retours).</li>
+    </ul>
+  </div></details>
+  <details><summary><span class="qn">Q3</span> Identifie 3 risques et positionne-les.</summary>
+  <div class="answer">
+    <div class="tbl-wrap"><table>
+      <tr><th>Risque</th><th>Probabilité</th><th>Impact</th><th>Priorité</th></tr>
+      <tr><td>Faille de sécurité / non-conformité</td><td>Moyenne</td><td>Très élevé</td><td>🔴 Critique</td></tr>
+      <tr><td>Retard face à la concurrence</td><td>Élevée</td><td>Élevé</td><td>🔴 Critique</td></tr>
+      <tr><td>Faible adoption si UX médiocre</td><td>Moyenne</td><td>Élevé</td><td>🟠 Moyenne-haute</td></tr>
+    </table></div>
+    <p><b>Mesures :</b> tests de sécurité et audits de conformité systématiques (plan B) ; MVP rapide pour prendre le marché ; implication des utilisateurs dès les premiers sprints pour l'ergonomie.</p>
+  </div></details>
+  <details><summary><span class="qn">Q4</span> Quel style de leadership adopter et pourquoi ?</summary>
+  <div class="answer">
+    <p>Un style <b>participatif</b> pour la phase d'innovation (faire émerger les idées, motiver une équipe experte), qui bascule vers le <b>directif</b> en cas d'urgence (faille de sécurité, deadline réglementaire). Message clé : <b>adapter le style</b> au contexte et à la maturité de l'équipe — il n'existe pas un seul bon style.</p>
+  </div></details>
 </section>
 
 <!-- ============================ EXAM ============================ -->
@@ -1038,6 +1121,24 @@
   <div class="box key"><span class="lbl">💡 Conseil méthode pour l'examen</span> Pour chaque question de définition : 1) donne la <b>définition</b> précise, 2) <b>explique/développe</b> avec les composantes, 3) ajoute un <b>exemple</b> concret. C'est ce qui distingue une bonne copie.</div>
 </section>
 
+<!-- ============================ QCM ============================ -->
+<section class="tab" id="qcm">
+  <h2 class="chap">❓ QCM — Teste tes réflexes</h2>
+  <p class="lead">Un QCM de <b>20 questions tirées au hasard</b> dans une banque de <b>74</b>, couvrant les <b>6 chapitres</b> (définitions, acteurs/MOA-MOE, triangle, WBS/PERT, Cycle en V, Agile/Scrum, risques…). Clique ta réponse : ✅ = bon, ❌ = faux (la bonne se surligne). À chaque « <b>Générer un nouveau QCM</b> », tu obtiens un tirage différent avec les réponses mélangées.</p>
+
+  <div style="text-align:center; margin:0 0 18px">
+    <button id="qcm-gen" style="cursor:pointer; border:none; background:linear-gradient(135deg,var(--brand),var(--brand2)); color:#fff; padding:12px 22px; border-radius:12px; font-weight:700; font-size:15px; box-shadow:0 4px 14px rgba(74,99,216,.25)">🎲 Générer un nouveau QCM</button>
+  </div>
+
+  <div id="qcm-list"></div>
+
+  <div class="box key" id="qcm-score" style="text-align:center; font-size:17px; display:none">
+    <span class="lbl">Ton score</span>
+    <div id="qcm-score-val" style="font-size:26px; font-weight:800; margin:4px 0"></div>
+    <button id="qcm-reset" style="cursor:pointer; margin-top:8px; border:none; background:linear-gradient(135deg,var(--brand),var(--brand2)); color:#fff; padding:10px 20px; border-radius:10px; font-weight:700; font-size:14.5px">🎲 Générer un nouveau QCM</button>
+  </div>
+</section>
+
 <!-- ============================ GLOSSAIRE ============================ -->
 <section class="tab" id="gloss">
   <h2 class="chap">📖 Glossaire des termes clés</h2>
@@ -1133,7 +1234,7 @@
 
 <footer>
   Fiche de révision — Gestion de Projet (APFG62) · Générée à partir des 6 chapitres de cours + 3 TD + examen blanc.<br>
-  💡 Astuce : révise par onglet, puis teste-toi sur l'onglet « 🎯 Examen blanc » en cachant les réponses.
+  💡 Astuce : révise par onglet, entraîne-toi sur « 📝 Exos types », teste-toi sur « 🎯 Examen blanc », puis muscle tes réflexes sur le « ❓ QCM » régénérable.
 </footer>
 
 <script>
@@ -1183,6 +1284,144 @@
       sections.forEach(s=>s.classList.toggle('active', s.id===firstTab));
     }
   }
+
+  /* ===== QCM interactif (banque + tirage aléatoire) ===== */
+  // La bonne réponse est toujours en 1re position (index 0) dans la banque ;
+  // l'ordre des propositions est mélangé à l'affichage.
+  const QCM_BANK=[
+    /* ---- Ch.1 Introduction ---- */
+    {q:"Un projet se caractérise avant tout par :",o:["Sa temporalité et son unicité","Sa répétitivité et sa continuité","L'absence de date de fin","Des résultats toujours prévisibles"]},
+    {q:"Selon l'ISO 21500, un projet est :",o:["Un ensemble unique de processus coordonnés avec un début et une fin","Une activité répétitive sans échéance","Un simple budget annuel","Un organigramme d'entreprise"]},
+    {q:"Quelle est la différence clé projet / activité opérationnelle ?",o:["Le projet est temporaire et unique, l'opérationnel est répétitif et continu","Le projet n'a pas d'objectif","L'opérationnel est toujours plus risqué","Il n'y a aucune différence"]},
+    {q:"Les 3 composantes de tout projet (PMI) sont :",o:["Périmètre, calendrier, ressources","Coût, client, concurrence","Idée, filtre, livrable","Sponsor, MOA, MOE"]},
+    {q:"Les 5 phases de la gestion de projet, dans l'ordre :",o:["Initiation → Planification → Exécution → Contrôle → Clôture","Planification → Initiation → Clôture → Exécution → Contrôle","Exécution → Contrôle → Initiation → Clôture → Planification","Initiation → Exécution → Planification → Clôture → Contrôle"]},
+    {q:"Un projet d'optimisation vise à :",o:["Améliorer quelque chose qui existe déjà","Créer quelque chose de totalement nouveau","Supprimer un service","Recruter du personnel"]},
+    {q:"Les 3 dimensions fondamentales d'un projet répondent aux questions :",o:["Pourquoi ? Comment ? Pour qui ?","Où ? Quand ? Combien ?","Qui ? Quoi ? Contre qui ?","Avant ? Pendant ? Après ?"]},
+    {q:"Le niveau de complexité d'un projet dépend de :",o:["Taille, objectif, enjeux, récurrence","La couleur du logo","Le nombre de réunions","La taille des locaux"]},
+    {q:"En quelle année le Manifeste Agile a-t-il été rédigé ?",o:["2001","1969","1957","2020"]},
+    {q:"Le PMI (Project Management Institute) a été créé en :",o:["1969","2001","1930","1996"]},
+    {q:"Les méthodes PERT et CPM datent de :",o:["1957–1959","2001","1969","1987"]},
+    {q:"La phase de clôture sert notamment à :",o:["Faire le bilan et capitaliser (leçons apprises)","Démarrer l'analyse des besoins","Recruter l'équipe","Définir le budget initial"]},
+
+    /* ---- Ch.2 Acteurs & Organisation ---- */
+    {q:"Les parties prenantes (stakeholders) sont :",o:["Tous ceux qui participent, influencent ou sont impactés par le projet","Uniquement le chef de projet","Seulement les clients","Les concurrents de l'entreprise"]},
+    {q:"Le sponsor (commanditaire) d'un projet :",o:["Détient le budget et valide les décisions majeures","Code les fonctionnalités","Anime le Daily Scrum","Réalise les tests unitaires"]},
+    {q:"Le chef de projet est aussi appelé :",o:["Maître d'œuvre (MOE)","Maître d'ouvrage (MOA)","Product Owner","Sponsor"]},
+    {q:"MOA et MOE désignent respectivement :",o:["Le client/commanditaire et le réalisateur","Le réalisateur et le client","Deux logiciels de planning","Deux types de risques"]},
+    {q:"Règle d'or concernant la MOA et la MOE :",o:["Elles doivent être séparées","Elles doivent être la même personne","La MOE fixe le budget","La MOA réalise les livrables"]},
+    {q:"Dans la matrice Pouvoir/Intérêt, une partie prenante à fort pouvoir ET fort intérêt doit être :",o:["Gérée de près","Simplement surveillée","Ignorée","Tenue informée occasionnellement"]},
+    {q:"Dans l'organisation FONCTIONNELLE, l'autorité du chef de projet est :",o:["Faible","Forte","Totale","Partagée à parts égales"]},
+    {q:"Dans l'organisation PAR PROJET, les ressources sont :",o:["Entièrement dédiées au projet","Contrôlées par les départements","Inexistantes","Partagées avec la concurrence"]},
+    {q:"L'organisation matricielle se caractérise par :",o:["Une autorité partagée entre chef de projet et managers","Aucun chef de projet","Une autorité uniquement fonctionnelle","L'absence de communication"]},
+    {q:"Le comité de pilotage (Steering Committee) sert à :",o:["Suivre, arbitrer et valider l'avancement","Coder le produit","Faire la comptabilité","Recruter les stagiaires"]},
+    {q:"Un inconvénient de l'organisation « par projet » est :",o:["Le coût élevé et la duplication des ressources","La lenteur de décision","L'autorité trop faible du chef de projet","L'absence d'équipe"]},
+
+    /* ---- Ch.3 Pilotage & contraintes ---- */
+    {q:"Piloter un projet, c'est essentiellement :",o:["Comparer le réalisé au prévu et corriger les écarts","Attendre la fin pour évaluer","Augmenter le budget chaque mois","Éviter toute mesure"]},
+    {q:"Le triangle du projet est composé de :",o:["Coût, délai, qualité","Coût, client, concurrence","Idée, filtre, livrable","MOA, MOE, sponsor"]},
+    {q:"Principe d'interdépendance du triangle : réduire les délais tend à :",o:["Augmenter les coûts ou baisser la qualité","N'avoir aucun effet","Améliorer automatiquement la qualité","Réduire les coûts"]},
+    {q:"Le « scope creep » désigne :",o:["L'extension incontrôlée du périmètre","Un outil de planification","Une cérémonie Scrum","Un type de contrat"]},
+    {q:"Conséquence typique du scope creep :",o:["Retards et dépassements de budget","Amélioration de la qualité","Réduction des coûts","Fin anticipée du projet"]},
+    {q:"La règle des 100 % concerne :",o:["Le WBS (la somme des éléments d'un niveau = 100 % du niveau supérieur)","Le taux de réussite obligatoire","La marge des tâches","Le budget maximal"]},
+    {q:"Le WBS (Work Breakdown Structure) sert à :",o:["Décomposer le projet en tâches/sous-tâches gérables","Calculer le ROI","Animer les rétrospectives","Choisir le sponsor"]},
+    {q:"Le chemin critique est :",o:["La suite de tâches à marge nulle, le chemin le plus long","Le chemin le plus court du projet","La liste des livrables","Le budget consommé"]},
+    {q:"Si une tâche a une marge nulle, elle est :",o:["Critique (tout retard retarde le projet)","Facultative","Sans importance","Toujours en avance"]},
+    {q:"La marge d'une tâche se calcule par :",o:["Date au plus tard − date au plus tôt","Date au plus tôt + durée","Coût prévu − coût réel","Durée × ressources"]},
+    {q:"La méthode PERT a été développée pour :",o:["Le programme POLARIS (marine US)","Le premier PMBOK","Le Manifeste Agile","Le RGPD"]},
+    {q:"Un livrable est :",o:["Un résultat concret et mesurable servant de point de contrôle","Une réunion hebdomadaire","Un membre de l'équipe","Un type de risque"]},
+    {q:"La courbe en S sert à :",o:["Estimer le reste à faire et le coût final prévisionnel","Dessiner l'organigramme","Prioriser le backlog","Choisir le style de leadership"]},
+    {q:"Le « Quadruple Constraint » ajoute au triangle :",o:["La satisfaction du client","Le nombre de réunions","La taille de l'équipe","Le nombre de risques"]},
+
+    /* ---- Ch.4 Cycle de vie & Cycle en V ---- */
+    {q:"Dans le Cycle en V, chaque phase de conception est associée à :",o:["Une phase de test correspondante","Un sprint","Un budget distinct","Un nouveau sponsor"]},
+    {q:"Dans le Cycle en V, l'analyse des besoins correspond, en montée, à :",o:["Les tests d'acceptation (validation client)","Les tests unitaires","Les tests d'intégration","Le codage"]},
+    {q:"Le développement/codage est testé par :",o:["Les tests unitaires","Les tests d'acceptation","Les tests système","La recette finale"]},
+    {q:"Une limite majeure du Cycle en V est :",o:["Le retour utilisateur tardif (produit vu à la fin)","La livraison trop fréquente","L'absence de documentation","L'impossibilité de planifier"]},
+    {q:"Le Cycle en V est particulièrement adapté aux projets :",o:["À exigences stables, réglementés/critiques (aéronautique, médical)","Startups très incertaines","Sans cahier des charges","À besoins qui changent chaque semaine"]},
+    {q:"L'approche Waterfall représente environ :",o:["80 % des projets en entreprise","10 % des projets","1 % des projets","50 % des projets"]},
+    {q:"L'étude de faisabilité débouche sur :",o:["Une décision Go / No Go","La livraison finale","Le recrutement","La rétrospective"]},
+    {q:"Le cahier des charges sert à :",o:["Formaliser les besoins et assurer une compréhension commune","Calculer la marge des tâches","Animer le Daily Scrum","Fixer les salaires"]},
+    {q:"Dans les versions opérationnelles, l'ordre correct est :",o:["Alpha → Beta → Gold","Gold → Beta → Alpha","Beta → Alpha → Gold","Alpha → Gold → Beta"]},
+    {q:"La « recette » d'un projet correspond à :",o:["La validation finale du livrable + procès-verbal de réception","La première idée","Le budget initial","Le Daily Scrum"]},
+    {q:"Dans la métaphore de la fusée, au fil des étapes, le risque :",o:["Diminue","Augmente","Reste constant","Disparaît dès le départ"]},
+    {q:"Un besoin « attendu » (modèle de Kano) est :",o:["Non exprimé mais indispensable au bon fonctionnement","Une fonctionnalité innovante surprenante","Explicitement demandé par écrit","Toujours facultatif"]},
+
+    /* ---- Ch.5 Agile & hybride ---- */
+    {q:"Le Manifeste Agile privilégie :",o:["Les individus et interactions plutôt que les processus et outils","La documentation exhaustive avant tout","Le suivi strict d'un plan figé","La négociation contractuelle avant la collaboration"]},
+    {q:"Une itération (sprint) dure généralement :",o:["1 à 4 semaines","1 à 4 jours","6 mois","1 an"]},
+    {q:"Combien de rôles définit Scrum ?",o:["3 (Product Owner, Scrum Master, équipe)","5","2","7"]},
+    {q:"Le Product Owner est chargé de :",o:["Représenter le client et prioriser les fonctionnalités","Lever les obstacles de l'équipe","Coder les tests unitaires","Valider le budget global"]},
+    {q:"Le Scrum Master a pour mission de :",o:["Faciliter l'équipe et lever les obstacles","Prioriser le backlog produit","Signer les contrats clients","Détenir le budget"]},
+    {q:"Le Daily Scrum dure au maximum :",o:["15 minutes","1 heure","1 journée","1 semaine"]},
+    {q:"La Sprint Retrospective sert à :",o:["Améliorer le fonctionnement de l'équipe (ce qui a marché / à améliorer)","Présenter le produit au client","Planifier le sprint suivant en détail","Recruter de nouveaux membres"]},
+    {q:"Un avantage clé de l'Agile est :",o:["Le feedback rapide et la détection précoce des problèmes","L'absence totale de client","Une documentation exhaustive garantie","Aucune réunion"]},
+    {q:"Une limite de l'Agile est :",o:["Il exige une forte implication du client","Il interdit toute livraison","Il supprime les tests","Il ne s'adapte jamais au changement"]},
+    {q:"Comparé au Cycle en V, l'Agile livre :",o:["Progressivement, par sprint","Uniquement à la toute fin","Jamais","Avant même de commencer"]},
+    {q:"L'approche hybride consiste à :",o:["Combiner planification structurée et flexibilité agile","Supprimer le chef de projet","Interdire les sprints","N'utiliser que le Cycle en V"]},
+    {q:"Développement « incrémental » signifie :",o:["Le produit s'enrichit progressivement de fonctionnalités","Tout est livré d'un coup à la fin","On supprime des fonctions à chaque étape","On recommence à zéro chaque semaine"]},
+
+    /* ---- Ch.6 Humain & Risques ---- */
+    {q:"Un risque est défini comme :",o:["Un événement incertain pouvant impacter les objectifs","Un dépassement de budget déjà survenu","Une tâche du WBS","Un livrable validé"]},
+    {q:"Le processus de gestion des risques suit l'ordre :",o:["Identifier → Analyser → Agir/Planifier → Suivre","Suivre → Agir → Identifier → Analyser","Agir → Identifier → Suivre → Analyser","Analyser → Suivre → Identifier → Agir"]},
+    {q:"La matrice des risques croise :",o:["Probabilité et impact","Coût et délai","MOA et MOE","Idée et livrable"]},
+    {q:"Un risque à forte probabilité ET fort impact est :",o:["Critique (zone rouge), action prioritaire immédiate","Secondaire (zone verte)","À ignorer","Toujours externe"]},
+    {q:"Le style de leadership DIRECTIF est surtout adapté :",o:["En situation d'urgence / crise","Pour l'innovation collaborative","Pour développer l'autonomie","Quand il n'y a aucune contrainte de temps"]},
+    {q:"Concernant les styles de leadership, la bonne idée est :",o:["Il n'existe pas un seul bon style : on l'adapte au contexte","Le style directif est toujours le meilleur","Le style coach convient à toutes les crises","Le style ne change rien"]},
+    {q:"La communication dans un projet est comparée à :",o:["Le système nerveux du projet","Un coût inutile","Une contrainte du triangle","Un livrable final"]},
+    {q:"Face aux conflits, le rôle du chef de projet est de :",o:["Les gérer efficacement (médiateur), pas de les éviter","Les ignorer systématiquement","Les interdire","Toujours trancher immédiatement seul"]},
+    {q:"Le REX (Retour d'Expérience) sert à :",o:["Capitaliser après le projet pour s'améliorer","Fixer le budget initial","Recruter l'équipe","Prioriser le backlog"]},
+    {q:"Parmi ces éléments, lequel est un facteur d'ÉCHEC d'un projet ?",o:["Une mauvaise communication","Des objectifs clairs","Un leadership efficace","Une bonne gestion des risques"]},
+    {q:"Un « plan B » (contingence) relève de l'étape :",o:["Planifier / Agir sur les risques","Identifier les risques","Clôturer le projet","Rédiger le cahier des charges"]},
+    {q:"Les 4 facteurs d'une bonne coopération d'équipe sont :",o:["Confiance, objectifs communs, rôles clairs, coordination","Budget, délai, qualité, périmètre","Alpha, Beta, Gold, recette","PO, Scrum Master, dev, sponsor"]},
+    {q:"Aujourd'hui, les entreprises considèrent que les compétences les plus importantes du chef de projet sont :",o:["Les compétences humaines (soft skills)","Uniquement techniques","Uniquement financières","Aucune en particulier"]}
+  ];
+  const QUIZ_SIZE=20;
+  let QCM=[];
+  const answered={}; const listEl=document.getElementById('qcm-list');
+  function shuffle(a){for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
+  function generateQuiz(){
+    const picked=shuffle(QCM_BANK.slice()).slice(0,QUIZ_SIZE);
+    QCM=picked.map(item=>{
+      const correct=item.o[0];
+      const opts=shuffle(item.o.slice());
+      return {q:item.q,o:opts,a:opts.indexOf(correct)};
+    });
+    for(const k in answered)delete answered[k];
+    document.getElementById('qcm-score').style.display='none';
+    renderQCM();
+  }
+  function renderQCM(){
+    listEl.innerHTML='';
+    QCM.forEach((item,i)=>{
+      const card=document.createElement('div'); card.className='card';
+      card.innerHTML='<h4 style="margin-top:2px">Q'+(i+1)+'. '+item.q+'</h4>';
+      const opts=document.createElement('div'); opts.className='qcm-opts';
+      item.o.forEach((txt,j)=>{
+        const b=document.createElement('button'); b.className='qcm-opt'; b.textContent=txt;
+        b.addEventListener('click',()=>{
+          if(answered[i]!==undefined)return;
+          answered[i]=j;
+          const btns=opts.querySelectorAll('.qcm-opt');
+          btns.forEach((bb,k)=>{bb.disabled=true; if(k===item.a)bb.classList.add('good'); if(k===j&&j!==item.a)bb.classList.add('bad');});
+          updateScore();
+        });
+        opts.appendChild(b);
+      });
+      card.appendChild(opts); listEl.appendChild(card);
+    });
+  }
+  function updateScore(){
+    const done=Object.keys(answered).length;
+    if(done===0)return;
+    let good=0; for(const k in answered) if(answered[k]===QCM[k].a) good++;
+    const box=document.getElementById('qcm-score'); box.style.display='block';
+    let msg=good+' / '+QCM.length;
+    let extra = good===QCM.length?' 🏆 Parfait !':(good>=QCM.length*0.7?' 👍 Bien joué':' 📚 À revoir');
+    document.getElementById('qcm-score-val').innerHTML=msg+(done===QCM.length?extra:' <span style="font-size:14px;color:var(--muted);font-weight:400">('+done+'/'+QCM.length+' répondues)</span>');
+  }
+  document.getElementById('qcm-gen').addEventListener('click',generateQuiz);
+  document.getElementById('qcm-reset').addEventListener('click',()=>{generateQuiz();document.querySelector('[data-tab="qcm"]').click();});
+  generateQuiz();
 </script>
 </body>
 </html>
