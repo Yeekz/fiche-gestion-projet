@@ -141,6 +141,7 @@
     <span class="pill">Cours expliqué</span>
     <span class="pill">Exemples types</span>
     <span class="pill">Exos corrigés (TD)</span>
+    <span class="pill">À retenir (schémas)</span>
     <span class="pill">Examen blanc (20 Q/R)</span>
     <span class="pill">QCM régénérable</span>
     <span class="pill">Glossaire</span>
@@ -149,6 +150,7 @@
 
 <nav class="tabs" id="tabs">
   <button data-tab="home" class="active">🏠 Vue d'ensemble</button>
+  <button data-tab="retenir">📌 À retenir</button>
   <button data-tab="c1">Ch.1 · Introduction</button>
   <button data-tab="c2">Ch.2 · Acteurs</button>
   <button data-tab="c3">Ch.3 · Pilotage</button>
@@ -197,12 +199,12 @@
       </ul>
     </div>
     <div class="card">
-      <h4>🎓 Structure de l'examen (d'après l'examen blanc)</h4>
+      <h4>🎓 Structure de l'examen (format réel)</h4>
       <ul>
-        <li><strong>Partie I</strong> : 20 questions de compréhension (définitions & explications)</li>
-        <li>Elles suivent l'ordre des chapitres 1 → 6</li>
-        <li>Voir l'onglet <b>🎯 Examen blanc</b> pour les 20 réponses rédigées</li>
-        <li>Les TD (études de cas) montrent le type d'application → onglet <b>📝 Exos types</b></li>
+        <li><strong>Partie 1 — Exercices (10 pts)</strong> : PERT/chemin critique, association de concepts, WBS</li>
+        <li><strong>Partie 2 — Cas pratique (10 pts)</strong> : étude de cas d'entreprise à analyser</li>
+        <li>Tout est corrigé dans l'onglet <b>🎯 Examen blanc</b> (+ 20 Q/R de cours en bonus)</li>
+        <li>Entraîne-toi d'abord sur <b>📝 Exos types</b> et <b>❓ QCM</b></li>
       </ul>
     </div>
   </div>
@@ -222,6 +224,152 @@
     <tr><td>5</td><td>Méthodes agiles & hybrides</td><td>Quelle méthode choisir ?</td><td>Manifeste Agile, Scrum, sprint, hybride</td></tr>
     <tr><td>6</td><td>Facteurs humains, risques & réussite</td><td>Comment réussir grâce aux gens ?</td><td>leadership, conflits, matrice des risques, REX</td></tr>
   </table></div>
+</section>
+
+<!-- ============================ A RETENIR ============================ -->
+<section class="tab" id="retenir">
+  <h2 class="chap">📌 À retenir — schémas & tableaux de synthèse</h2>
+  <p class="lead">Toute la matière condensée en <b>schémas et tableaux</b>. Si tu ne dois réviser qu'un seul onglet la veille de l'examen, c'est celui-là.</p>
+
+  <div class="box key"><span class="lbl">🔑 L'histoire du module en 1 ligne</span>
+  Un <b>projet</b> (temporaire + unique) transforme une idée en <b>livrable</b> → on l'<b>organise</b> (acteurs, MOA/MOE) → on le <b>pilote</b> (triangle coût/délai/qualité) → dans un <b>ordre</b> (cycle de vie / Cycle en V) → avec une <b>méthode</b> (classique / Agile / hybride) → et on réussit grâce aux <b>humains & à la gestion des risques</b>.</div>
+
+  <h3>1 · Projet vs Opérationnel</h3>
+  <div class="tbl-wrap"><table>
+    <tr><th>Activité opérationnelle</th><th>Projet</th></tr>
+    <tr><td>Répétitive & continue</td><td><b>Temporaire & unique</b></td></tr>
+    <tr><td>Fait « tourner la machine »</td><td>Crée quelque chose de <b>nouveau</b></td></tr>
+    <tr><td>Résultats prévisibles</td><td>Forte <b>incertitude</b></td></tr>
+    <tr><td>Ex : production, paie, maintenance</td><td>Ex : lancer un produit, construire un bâtiment</td></tr>
+  </table></div>
+
+  <h3>2 · Les 5 phases (à réciter dans l'ordre)</h3>
+  <div class="flow">
+    <span class="step">1. Initiation</span><span class="arr">→</span>
+    <span class="step">2. Planification</span><span class="arr">→</span>
+    <span class="step">3. Exécution</span><span class="arr">→</span>
+    <span class="step">4. Contrôle / Suivi</span><span class="arr">→</span>
+    <span class="step">5. Clôture</span>
+  </div>
+  <div class="tbl-wrap"><table>
+    <tr><th>Phase</th><th>On y fait…</th><th>Livrable clé</th></tr>
+    <tr><td>Initiation</td><td>Besoin, faisabilité, Go/No Go</td><td>Charte de projet</td></tr>
+    <tr><td>Planification</td><td>WBS, Gantt, budget, risques</td><td>Plan de projet</td></tr>
+    <tr><td>Exécution</td><td>Produire les livrables</td><td>Le produit / service</td></tr>
+    <tr><td>Contrôle</td><td>Suivre écarts & KPI</td><td>Tableaux de bord</td></tr>
+    <tr><td>Clôture</td><td>Livrer, bilan, REX</td><td>PV de réception + leçons apprises</td></tr>
+  </table></div>
+
+  <h3>3 · Le triangle du projet (LE concept star ⭐⭐⭐)</h3>
+  <div class="triangle-wrap">
+    <svg width="260" height="200" viewBox="0 0 260 200" aria-label="Triangle du projet">
+      <polygon points="130,20 30,180 230,180" fill="rgba(74,99,216,.10)" stroke="#4a63d8" stroke-width="2.5"/>
+      <text x="130" y="12" text-anchor="middle" fill="#1b2236" font-size="15" font-weight="700">COÛT</text>
+      <text x="18" y="196" text-anchor="middle" fill="#1b2236" font-size="15" font-weight="700">DÉLAI</text>
+      <text x="242" y="196" text-anchor="middle" fill="#1b2236" font-size="15" font-weight="700">QUALITÉ</text>
+      <text x="130" y="120" text-anchor="middle" fill="#7c53d6" font-size="14" font-weight="700">PROJET</text>
+    </svg>
+  </div>
+  <div class="box danger"><span class="lbl">⚠️ Interdépendances (à savoir absolument)</span>
+  Toute modif d'une contrainte impacte les 2 autres :
+  <ul>
+    <li>↓ <b>Délais</b> → ↑ coûts (plus de ressources) ou ↓ qualité</li>
+    <li>↓ <b>Coûts</b> → ↓ qualité ou ↑ délais</li>
+    <li>↑ <b>Qualité</b> → ↑ coûts et/ou ↑ délais</li>
+  </ul>
+  <span class="tag t-blue">Variante</span> Quadruple constraint = + la <b>satisfaction du client</b>.</div>
+
+  <h3>4 · Les acteurs & MOA / MOE</h3>
+  <div class="tbl-wrap"><table>
+    <tr><th>Acteur</th><th>Côté</th><th>Rôle</th></tr>
+    <tr><td><b>Sponsor / Commanditaire</b></td><td class="" >MOA (ouvrage)</td><td>Détient le <b>budget</b>, fixe les objectifs, valide les décisions majeures</td></tr>
+    <tr><td><b>Chef de projet</b></td><td>MOE (œuvre)</td><td>Le <b>pilote</b> : planifie, coordonne, suit délais/coûts/qualité, gère les risques</td></tr>
+    <tr><td><b>Équipe projet</b></td><td>MOE (œuvre)</td><td>Réalise les tâches, produit les livrables</td></tr>
+    <tr><td><b>Comité de pilotage</b></td><td>Gouvernance</td><td>Suit, arbitre et valide l'avancement</td></tr>
+  </table></div>
+  <div class="box key"><span class="lbl">🔑 MOA ≠ MOE</span> <b>MOA</b> = client qui définit le besoin et <b>paye</b>. <b>MOE</b> = réalisateur qui <b>construit</b>. <b>Règle d'or : les deux doivent être séparées.</b></div>
+
+  <h3>5 · Les 3 modes d'organisation</h3>
+  <div class="tbl-wrap"><table>
+    <tr><th>Critère</th><th>Fonctionnelle</th><th>Matricielle</th><th>Par projet</th></tr>
+    <tr><td>Autorité du chef de projet</td><td class="">Faible</td><td>Partagée</td><td><b>Forte</b></td></tr>
+    <tr><td>Ressources</td><td>Aux départements</td><td>Partagées</td><td><b>Dédiées</b></td></tr>
+    <tr><td>Idéal pour…</td><td>Projets simples</td><td>Projets équilibrés</td><td>Projets complexes</td></tr>
+    <tr><td>Limite</td><td>Coordination difficile</td><td>Conflits d'autorité</td><td>Coût élevé</td></tr>
+  </table></div>
+
+  <h3>6 · Le Cycle en V (chaque conception ↔ un test)</h3>
+  <div class="tbl-wrap"><table>
+    <tr><th>⬇️ Descente (Conception)</th><th>↔</th><th>⬆️ Montée (Validation)</th></tr>
+    <tr><td>Analyse des besoins</td><td>↔</td><td>Tests d'acceptation (client)</td></tr>
+    <tr><td>Spécifications fonctionnelles</td><td>↔</td><td>Tests système</td></tr>
+    <tr><td>Conception technique</td><td>↔</td><td>Tests d'intégration</td></tr>
+    <tr><td>Développement / codage</td><td>↔</td><td>Tests unitaires</td></tr>
+  </table></div>
+  <div class="box ex"><span class="lbl">Quand l'utiliser ?</span> Besoins <b>stables</b>, secteurs <b>réglementés/critiques</b> (aéronautique, médical, automobile). ⚠️ Limite = retour client <b>tardif</b> (produit vu à la fin).</div>
+
+  <h3>7 · Cycle en V vs Agile</h3>
+  <div class="tbl-wrap"><table>
+    <tr><th>Critère</th><th>Cycle en V</th><th>Agile</th></tr>
+    <tr><td>Planification</td><td>Détaillée au début</td><td>Progressive</td></tr>
+    <tr><td>Besoins</td><td>Figés dès le départ</td><td><b>Évolutifs</b></td></tr>
+    <tr><td>Livraison</td><td>À la fin</td><td><b>Par sprint</b></td></tr>
+    <tr><td>Changement</td><td>Difficile</td><td>Adaptation continue</td></tr>
+    <tr><td>Client</td><td>Faible implication</td><td><b>Forte collaboration</b></td></tr>
+    <tr><td>Flexibilité</td><td>Faible</td><td>Élevée</td></tr>
+  </table></div>
+  <div class="box clair"><span class="lbl">Hybride</span> Le meilleur des deux : phases critiques en classique + phases d'innovation en agile.</div>
+
+  <h3>8 · Scrum en un coup d'œil</h3>
+  <div class="grid g2">
+    <div class="card"><h4>👤 Les 3 rôles</h4><ul>
+      <li><b>Product Owner</b> — représente le client, <b>priorise</b> le backlog</li>
+      <li><b>Scrum Master</b> — facilite, <b>lève les obstacles</b></li>
+      <li><b>Équipe de dev</b> — réalise, s'<b>auto-organise</b></li>
+    </ul></div>
+    <div class="card"><h4>🔁 Les 4 cérémonies</h4><ul>
+      <li><b>Sprint Planning</b> — début : on planifie</li>
+      <li><b>Daily Scrum</b> — 15 min/jour : on coordonne</li>
+      <li><b>Sprint Review</b> — fin : on montre au client</li>
+      <li><b>Rétrospective</b> — on s'améliore</li>
+    </ul></div>
+  </div>
+  <div class="box ex"><span class="lbl">Sprint</span> Itération de <b>1 à 4 semaines</b> qui produit une <b>version fonctionnelle</b> du produit.</div>
+
+  <h3>9 · Pilotage : WBS, PERT & chemin critique</h3>
+  <div class="grid g2">
+    <div class="box ex"><span class="lbl">WBS</span> Décompose le projet en tâches/sous-tâches (arbre). <b>Règle des 100 %</b> : la somme d'un niveau = 100 % du niveau au-dessus.</div>
+    <div class="box ex"><span class="lbl">Chemin critique</span> Suite de tâches à <b>marge nulle</b> = chemin le plus long = durée totale. Marge = date au plus tard − date au plus tôt.</div>
+  </div>
+  <div class="box warn"><span class="lbl">⚠️ Scope creep</span> Dérive incontrôlée du périmètre (nouvelles demandes en cours de route) → <b>retards + surcoûts</b>. À geler / gérer via un processus de changement.</div>
+
+  <h3>10 · Gestion des risques</h3>
+  <div class="flow">
+    <span class="step">1. Identifier</span><span class="arr">→</span>
+    <span class="step">2. Analyser (proba × impact)</span><span class="arr">→</span>
+    <span class="step">3. Agir (plan B)</span><span class="arr">→</span>
+    <span class="step">4. Suivre</span>
+  </div>
+  <div class="tbl-wrap"><table>
+    <tr><th>Impact ⬇️ / Probabilité ➡️</th><th>Faible</th><th>Moyenne</th><th>Élevée</th></tr>
+    <tr><th>Élevé</th><td>🟠 Moyen</td><td>🔴 Critique</td><td>🔴 Critique</td></tr>
+    <tr><th>Moyen</th><td>🟢 Faible</td><td>🟠 Moyen</td><td>🔴 Critique</td></tr>
+    <tr><th>Faible</th><td>🟢 Faible</td><td>🟢 Faible</td><td>🟠 Moyen</td></tr>
+  </table></div>
+  <div class="box clair"><span class="lbl">Lecture</span> Forte probabilité + fort impact = <b>rouge = action prioritaire immédiate</b>. Faible + faible = <b>vert = surveillance simple</b>.</div>
+
+  <h3>11 · Les phrases qui rapportent des points</h3>
+  <div class="box key"><span class="lbl">🎯 À ressortir le jour J</span>
+  <ul>
+    <li>Un projet = <b>temporaire + unique + objectif précis</b>.</li>
+    <li><b>MOA ≠ MOE</b> et elles sont <b>séparées</b>.</li>
+    <li>Le triangle : toucher une contrainte <b>impacte les deux autres</b>.</li>
+    <li><b>Scope creep</b> = dérive du périmètre = retards + surcoûts.</li>
+    <li>Cycle en V = <b>chaque conception ↔ un test</b> ; Agile = <b>itératif + feedback rapide</b>.</li>
+    <li>Chemin critique = tâches à <b>marge nulle</b> ; tout retard dessus retarde le projet.</li>
+    <li>Un projet réussit <b>d'abord grâce aux humains</b> (communication = 1ʳᵉ cause d'échec).</li>
+    <li>Il n'existe <b>pas un seul bon style de leadership</b> : on l'adapte au contexte.</li>
+  </ul></div>
 </section>
 
 <!-- ============================ CH1 ============================ -->
@@ -1020,8 +1168,121 @@ Durée totale = 3 + 5 + 4 + 2 = 14 jours</div>
 
 <!-- ============================ EXAM ============================ -->
 <section class="tab" id="exam">
-  <h2 class="chap">🎯 Examen Blanc — Partie I (Questions de compréhension)</h2>
-  <p class="lead">Les 20 questions de l'examen blanc, avec des <b>réponses rédigées type</b>. Elles couvrent tout le programme. Clique pour révéler chaque réponse — idéal pour t'auto-tester.</p>
+  <h2 class="chap">🎯 Examen Blanc — Cas pratiques & exercices types</h2>
+  <p class="lead">Un <b>examen blanc complet au format réel</b> : <b>Partie 1 — Exercices (10 pts)</b> (PERT/chemin critique, association de concepts, WBS) + <b>Partie 2 — Cas pratique d'entreprise (10 pts)</b>. Traite chaque exercice <b>sur une feuille</b>, puis <b>déplie le corrigé</b> pour vérifier.</p>
+
+  <div class="box warn"><span class="lbl">🎯 Conseil de méthode</span> Fais l'exercice <b>en entier</b> avant de regarder la correction. Pour le cas pratique : 1) définir/analyser, 2) appliquer le cours (triangle, méthode, risques), 3) <b>justifier</b> et donner un <b>exemple</b>.</div>
+
+  <h3>🟦 PARTIE 1 — Exercices (10 points)</h3>
+
+  <h4>Exercice 1 — PERT &amp; chemin critique (4 pts)</h4>
+  <div class="card">
+    <p>Un projet est composé des tâches suivantes (durées en <b>jours</b>) :</p>
+    <div class="tbl-wrap"><table>
+      <tr><th>Tâche</th><th>Description</th><th>Durée</th><th>Prédécesseur(s)</th></tr>
+      <tr><td>A</td><td>Lancement</td><td>2</td><td>—</td></tr>
+      <tr><td>B</td><td>Conception</td><td>4</td><td>A</td></tr>
+      <tr><td>C</td><td>Achats / appro</td><td>3</td><td>A</td></tr>
+      <tr><td>D</td><td>Développement</td><td>5</td><td>B</td></tr>
+      <tr><td>E</td><td>Préparation site</td><td>2</td><td>C</td></tr>
+      <tr><td>F</td><td>Déploiement</td><td>3</td><td>D, E</td></tr>
+    </table></div>
+    <p><b>Questions :</b> 1) calcule les dates au plus tôt/au plus tard et les marges · 2) identifie le <b>chemin critique</b> et la <b>durée totale</b> · 3) si la tâche <b>D prend 2 jours de retard</b>, quel est l'impact sur la fin du projet ?</p>
+  </div>
+  <details><summary><span class="qn">✓</span> Corrigé Exercice 1</summary>
+  <div class="answer">
+    <div class="tbl-wrap"><table>
+      <tr><th>Tâche</th><th>Durée</th><th>ES</th><th>EF</th><th>LS</th><th>LF</th><th>Marge</th></tr>
+      <tr><td><b>A</b></td><td>2</td><td>0</td><td>2</td><td>0</td><td>2</td><td><b>0 🔴</b></td></tr>
+      <tr><td><b>B</b></td><td>4</td><td>2</td><td>6</td><td>2</td><td>6</td><td><b>0 🔴</b></td></tr>
+      <tr><td>C</td><td>3</td><td>2</td><td>5</td><td>6</td><td>9</td><td>4</td></tr>
+      <tr><td><b>D</b></td><td>5</td><td>6</td><td>11</td><td>6</td><td>11</td><td><b>0 🔴</b></td></tr>
+      <tr><td>E</td><td>2</td><td>5</td><td>7</td><td>9</td><td>11</td><td>4</td></tr>
+      <tr><td><b>F</b></td><td>3</td><td>11</td><td>14</td><td>11</td><td>14</td><td><b>0 🔴</b></td></tr>
+    </table></div>
+    <div class="calc">Chemin critique : A → B → D → F
+Durée totale = 2 + 4 + 5 + 3 = 14 jours
+
+3) D est une tâche CRITIQUE (marge 0) → un retard de 2 jours
+   décale toute la fin : projet terminé en 14 + 2 = 16 jours.
+   (Si le retard avait touché C ou E, marge 4 → aucun impact tant que ≤ 4 j.)</div>
+  </div></details>
+
+  <h4>Exercice 2 — Associer chaque concept à sa description (3 pts)</h4>
+  <div class="card">
+    <div class="tbl-wrap"><table>
+      <tr><th>Concept</th><th>Description (à relier)</th></tr>
+      <tr><td>1. Charte de projet</td><td>a. Répartition des personnes, du temps et du matériel entre les tâches</td></tr>
+      <tr><td>2. Jalons (milestones)</td><td>b. Processus de gestion des modifications de périmètre, planning ou budget</td></tr>
+      <tr><td>3. Allocation des ressources</td><td>c. Document formel qui autorise le projet et définit les objectifs</td></tr>
+      <tr><td>4. Suivi de projet</td><td>d. Points ou événements significatifs de la timeline du projet</td></tr>
+      <tr><td>5. Gestion du changement</td><td>e. Processus systématique de suivi de l'avancement du projet</td></tr>
+    </table></div>
+  </div>
+  <details><summary><span class="qn">✓</span> Corrigé Exercice 2</summary>
+  <div class="answer">
+    <div class="calc">1 → c  (Charte = document qui autorise le projet & définit les objectifs)
+2 → d  (Jalons = événements significatifs de la timeline)
+3 → a  (Allocation des ressources = répartition personnes/temps/matériel)
+4 → e  (Suivi = tracking systématique de l'avancement)
+5 → b  (Gestion du changement = gérer les modifs de scope/planning/budget)</div>
+  </div></details>
+
+  <h4>Exercice 3 — Work Breakdown Structure (3 pts)</h4>
+  <div class="card">
+    <p>Une entreprise développe une nouvelle application mobile et décide de créer un <b>WBS</b>.</p>
+    <p><b>a.</b> Explique brièvement ce qu'est un WBS et son utilité. <b>b.</b> Pour chacune des phases ci-dessous, propose <b>au moins 2 sous-tâches</b> : Planification · Conception · Développement · Test · Déploiement. <b>c.</b> Pourquoi est-il important de structurer les tâches de façon <b>hiérarchique</b> ?</p>
+  </div>
+  <details><summary><span class="qn">✓</span> Corrigé Exercice 3</summary>
+  <div class="answer">
+    <p><b>a.</b> Le <b>WBS (Work Breakdown Structure)</b> décompose le projet en éléments plus petits et gérables (structure en arbre). Utilité : clarifier le travail à faire, affecter un <b>responsable / coût / échéance</b> à chaque lot, estimer et suivre l'avancement. <b>Règle des 100 %</b> : la somme des sous-tâches = 100 % du travail du niveau supérieur.</p>
+    <p><b>b.</b> Exemple de décomposition :</p>
+    <div class="tbl-wrap"><table>
+      <tr><th>Phase</th><th>Sous-tâches (exemples)</th></tr>
+      <tr><td>Planification</td><td>Recueil des besoins · Définition du périmètre &amp; budget</td></tr>
+      <tr><td>Conception</td><td>Maquettes UX/UI · Architecture technique</td></tr>
+      <tr><td>Développement</td><td>Développement front-end · Développement back-end / API</td></tr>
+      <tr><td>Test</td><td>Tests unitaires · Tests d'acceptation utilisateurs</td></tr>
+      <tr><td>Déploiement</td><td>Mise en production · Formation &amp; documentation</td></tr>
+    </table></div>
+    <p><b>c.</b> La structure hiérarchique évite les <b>oublis</b> et les <b>doublons</b>, clarifie les responsabilités, facilite l'<b>estimation des coûts/délais</b> et le <b>suivi</b> (chaque lot devient un point de contrôle). Elle garantit que <b>tout le travail — et rien que le travail — est couvert</b>.</p>
+  </div></details>
+
+  <h3>🟪 PARTIE 2 — Cas pratique (10 points)</h3>
+  <div class="card">
+    <h4 style="margin-top:2px">« Solira » passe au test automatisé &amp; à l'agile</h4>
+    <p><b>Solira</b> est un éditeur de logiciels de cybersécurité qui sert des milliers d'entreprises clientes. Son système central de gestion des commandes (ERP) est en pleine <b>migration</b> vers une nouvelle version, tout en devant rester opérationnel. En parallèle, l'entreprise a été <b>séparée</b> de sa maison mère et doit isoler ses propres systèmes informatiques — le tout <b>sans augmenter les effectifs IT</b>.</p>
+    <p>Jusqu'ici, Solira validait ses logiciels par des <b>tests manuels</b>. Mais à chaque modification, l'équipe devait <b>tout revérifier</b> avant la mise en production, ce qui devenait impossible à tenir vu le nombre de changements. Solira décide alors deux choses : <b>1)</b> adopter une <b>méthode agile</b> (sprints de 2 semaines, où toute l'équipe collabore sur des incréments livrés à chaque cycle) au lieu de la cascade traditionnelle ; <b>2)</b> mettre en place un <b>outil de test automatisé</b> capable de rejouer des scénarios de bout en bout (ex : simuler 60 000 commandes en fin de trimestre). Résultat : ~2 500 heures de travail manuel économisées et une maintenance au plus bas.</p>
+    <p><b>Questions :</b></p>
+    <ol>
+      <li><b>(2 pts)</b> Pourquoi une entreprise comme Solira a-t-elle intérêt à <b>automatiser ses tests</b> ?</li>
+      <li><b>(3 pts)</b> Quels facteurs de <b>management, d'organisation et de technologie</b> Solira a-t-elle dû traiter ?</li>
+      <li><b>(3 pts)</b> Compare la méthode <b>agile</b> adoptée avec les méthodes <b>classiques</b> : explique les bénéfices <b>et</b> les risques de l'agile.</li>
+      <li><b>(2 pts)</b> Quels <b>critères</b> une organisation doit-elle considérer pour choisir (ou non) une méthode agile ?</li>
+    </ol>
+  </div>
+  <details><summary><span class="qn">✓</span> Corrigé du cas pratique</summary>
+  <div class="answer">
+    <p><b>1) Intérêt d'automatiser les tests :</b> le volume de changements est trop élevé pour du test manuel (migration ERP + séparation des SI + effectifs constants). L'automatisation permet de <b>rejouer rapidement et à moindre coût</b> des scénarios de bout en bout, de <b>tester de gros volumes</b> (60 000 commandes), de <b>détecter les régressions tôt</b> avant la mise en production, et de <b>libérer les équipes</b> pour des tâches à valeur ajoutée (≈ 2 500 h économisées). Cela améliore la <b>qualité</b> et la <b>fiabilité</b> tout en tenant les <b>délais</b>.</p>
+    <p><b>2) Les 3 catégories de facteurs :</b></p>
+    <ul>
+      <li><b>Management :</b> faire plus (migration + séparation) sans budget/effectif supplémentaire → arbitrages, priorisation, pilotage serré ; conduite du changement vers l'agile.</li>
+      <li><b>Organisation :</b> passage de la cascade (rôles cloisonnés : QA, test, recette) à des <b>équipes agiles pluridisciplinaires auto-organisées</b> ; coordination de ~40 systèmes interdépendants.</li>
+      <li><b>Technologie :</b> choix et intégration d'un <b>outil de test automatisé</b> compatible avec l'ERP et les applications tierces, capable de tester des processus complexes de bout en bout.</li>
+    </ul>
+    <p><b>3) Agile vs classique — bénéfices &amp; risques :</b></p>
+    <div class="tbl-wrap"><table>
+      <tr><th>Bénéfices de l'agile</th><th>Risques / limites de l'agile</th></tr>
+      <tr><td>Livraisons fréquentes (sprints de 2 sem.), feedback rapide</td><td>Exige une <b>forte implication</b> continue des parties prenantes</td></tr>
+      <tr><td>Détection précoce des problèmes → corrections moins coûteuses</td><td>Documentation parfois insuffisante (risque si réglementation)</td></tr>
+      <tr><td>Adaptation aux changements, équipe motivée &amp; autonome</td><td>Difficile à coordonner sur de <b>très grands périmètres</b> (ici ~40 systèmes)</td></tr>
+    </table></div>
+    <p>La cascade fige tout au départ et découvre les erreurs à la fin (tardif, coûteux) ; l'agile itère et corrige en continu — mais demande de la maturité et de la discipline.</p>
+    <p><b>4) Critères pour choisir l'agile (ou non) :</b> besoins <b>stables ou évolutifs</b> ? niveau d'<b>innovation/incertitude</b> ? <b>disponibilité du client</b> pour des tests fréquents ? <b>contraintes réglementaires</b> (traçabilité, documentation) ? <b>taille/complexité</b> du projet et maturité de l'équipe ? → Agile si besoins évolutifs, client disponible, innovation forte ; classique (ou hybride) si exigences stables, normes strictes, très grand périmètre.</p>
+  </div></details>
+
+  <h3>📚 Bonus — 20 questions de cours (auto-test)</h3>
+  <p class="lead">En plus des cas pratiques, révise les <b>définitions</b> avec ces 20 questions rédigées (utile aussi pour l'oral). Clique pour révéler.</p>
 
   <details><summary><span class="qn">1</span> Définissez ce qu'est un projet et expliquez ses principales caractéristiques (temporalité, unicité, objectifs).</summary>
   <div class="answer"><p>Un <strong>projet</strong> est une initiative <b>temporaire</b> visant à produire un produit, service ou résultat <b>unique</b>, avec des <b>objectifs précis</b>, dans un délai et un budget définis. Caractéristiques :</p>
